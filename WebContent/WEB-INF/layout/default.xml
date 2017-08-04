@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN" "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+
+<tiles-definitions>
+	<definition name="software.base" template="/WEB-INF/template/default.jsp">
+		<put-attribute name="title" value="Home"></put-attribute>
+		<put-attribute name="header" value="/WEB-INF/tiles/header.jsp"></put-attribute>
+		<put-attribute name="content" value="/WEB-INF/tiles/content.jsp"></put-attribute>
+		<put-attribute name="footer" value="/WEB-INF/tiles/footer.jsp"></put-attribute>
+	</definition>
+	
+	<definition name="home" extends="software.base">
+		<put-attribute name="title" value="DIU Home"></put-attribute>
+		<put-attribute name="content" value="/WEB-INF/tiles/home.jsp"></put-attribute>
+	</definition>
+	
+	<definition name="login" extends="software.base">
+		<put-attribute name="title" value="Login"></put-attribute>
+		<put-attribute name="content" value="/WEB-INF/tiles/login.jsp"></put-attribute>
+	</definition>
+	
+	<definition name="loggedout" extends="software.base">
+		<put-attribute name="title" value="LogOut"></put-attribute>
+		<put-attribute name="content" value="/WEB-INF/tiles/loggedout.jsp"></put-attribute>
+	</definition>
+	
+	<definition name="welcome" extends="software.base">
+		<put-attribute name="title" value="Welcome"></put-attribute>
+		<put-attribute name="content" value="/WEB-INF/tiles/welcome.jsp"></put-attribute>
+	</definition>
+	
+	<definition name="employee" extends="software.base">
+		<put-attribute name="title" value="Welcome"></put-attribute>
+		<put-attribute name="content" value="/WEB-INF/tiles/employee.jsp"></put-attribute>
+	</definition>
+	
+	<definition name="registration" extends="software.base">
+		<put-attribute name="title" value="Registration"></put-attribute>
+		<put-attribute name="content" value="/WEB-INF/tiles/registration.jsp"></put-attribute>
+	</definition>
+	
+	<definition name="showresult" extends="software.base">
+		<put-attribute name="title" value="ShowResult"></put-attribute>
+		<put-attribute name="content" value="/WEB-INF/tiles/showresult.jsp"></put-attribute>
+	
+	</definition>
+	
+	<definition name="studentresult" extends="software.base">
+		<put-attribute name="title" value="StudentResult"></put-attribute>
+		<put-attribute name="content" value="/WEB-INF/tiles/studentresult.jsp"></put-attribute>
+	
+	</definition>
+		
+</tiles-definitions>
