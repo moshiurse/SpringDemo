@@ -2,7 +2,7 @@
 
 	$(document).ready(function(){
 		
-		//	var countryList = [];		
+		//	var countryList = [];	
 		//	funGetCountryList();
 		
 		viewData();
@@ -34,7 +34,7 @@
 		/* Submitting form to controller*/
 		$("#submit").click(function(event) {
 			
-			alert("button clicked!");
+			
 			
 			event.preventDefault();
 			
@@ -44,20 +44,31 @@
 				
 				data["name"] = $("#name").val();	
 				data["address"] = $("#address").val();	
+				var id = $("#id").val();
 				
+				if( id == ""){
+					id = 0;
+				}
 				//alert(JSON.stringify(data));
 				//return false;
 				$.ajax({
 		             type: "POST",
-		             url: "saveEmployee",
+		             url: "saveEmployee/" + id,
 		             data: JSON.stringify(data),
 		             contentType: "application/json; charset=utf-8",             
 		             success: function (successData) {
+		            	 $("#id").val("");
+		            	 $("#name").val("");
+		            	 $("#address").val("");
+		            	 
+		            	 
 		            	viewData();
 		             	//$("#submit").prop("disabled", false);			                 
 		                $("#successMessage").html(successData); 
 		                $("#successMessage").removeClass("hidden");
 		                $("#errorMessage").addClass("hidden");
+		                
+		               
 		                      
 		             },
 		             error: function (error) {
@@ -70,7 +81,10 @@
 	
 			} // End of validation		
 		}); // End of form submission
-	
+		
+		
+		
+		
 	
 	}); // End of document ready()
 	
@@ -81,9 +95,9 @@
 			var dataTable = '<table class="table"><tr><th>ID</th><th>Name</th><th>Address</th><th>Update</th><th>Delete</th></tr>';
 			
 			for(var key in data){
-				dataTable += '<tr><td>' + data[key].id + '</td><td>' + data[key].name + '</td><td>'
-				+ data[key].address + '</td><td><input type="button" id="update" value="Update" class="update" onclick="updateEmaployee()></td><td><input type="button" id="delete" value="Delete" class="delete" onclick="deleteEmployee()></td></tr>';
-			}
+		        dataTable += '<tr><td>' + data[key].id + '</td><td>' + data[key].name + '</td><td>'
+		        + data[key].address + '</td><td><input type="button" id="update" onclick="funPopulate(' + data[key].id + ",'" + data[key].name + "','" + data[key].address + "'" + ')" value="Update" class="update"></td><td><input type="button" id="delete" value="Delete" class="delete" onclick="funDelete(' +data[key].id + ')"></td></tr>';
+		    }
 			
 			dataTable += '</table>';
 			
@@ -102,7 +116,7 @@
 			
 			
 				
-				dataTable += '<tr><td>' + data["id"] + '</td><td>' + data["name"] + '</td><td>' + data["address"] + '</td><td><input type="button" id="update" value="Update" class="update" onclick="updateEmployee()></td><td><input type="button" id="delete" value="Delete" class="delete" onclick="deleteEmployee()></td></tr>';;
+				dataTable += '<tr><td>' + data["id"] + '</td><td>' + data["name"] + '</td><td>' + data["address"] + '</td><td><input type="button" id="update" value="Update" class="update"></td><td><input type="button" id="delete" value="Delete" class="delete" onclick="funDelete()"></td></tr>';;
 			
 			
 			dataTable += '</table>';
@@ -139,6 +153,29 @@
 		return countryName;
 	}
 	**/  // End funGetAppraisalHeadName()
+	
+	
+	
+	function funPopulate(pId, pName, pAddress){
+		$("#id").val(pId);
+		$("#name").val(pName);
+		$("#address").val(pAddress);
+		
+	}
+	
+	function funDelete(pId){
+		
+		var id = $("#id").val(pId);
+		alert("Are you sure to delete ");		
+		$.post("deleteEmployee",{id:pId},function(data){
+			
+			viewData();
+			
+			$("#successMessage").html("Data Deleted Successfully!!"); 
+            $("#successMessage").removeClass("hidden");
+            $("#errorMessage").addClass("hidden");
+		});
+	}
 </script>
 
 <div class="bootstrap-iso">
@@ -172,6 +209,16 @@
 					
 					<div id="successMessage" align="center" class="hidden alert alert-success"></div>
 					<div id="errorMessage" align="center" class="hidden alert alert-danger"></div>	
+						
+					<!-- Text input-->
+					<div class="form-group hidden">
+						<label class="control-label requiredField" for="name">id</label>
+						<div class="form-group">
+							<input id="id" name="id"
+								placeholder="Enter ID" class="form-control" type="text" />
+							
+						</div>
+					</div>
 							
 					<!-- Text input-->
 					<div class="form-group">

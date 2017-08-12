@@ -35,12 +35,13 @@ public class StudentMarks {
 		this.id = id;
 	}
 
-	public String getStudentId() {
+	
+	public String getStudentid() {
 		return studentid;
 	}
 
-	public void setStudentId(String studentId) {
-		this.studentid = studentId;
+	public void setStudentid(String studentid) {
+		this.studentid = studentid;
 	}
 
 	public int getMarks() {

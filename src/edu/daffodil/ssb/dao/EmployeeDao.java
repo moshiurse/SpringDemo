@@ -27,6 +27,10 @@ public class EmployeeDao {
 		session().save(employee);
 	}
 	
+	public void deleteEmployee(Employee id){
+		session().delete(id);
+	}
+	
 	public void updateEmployee(Employee employee){
 		session().update(employee);
 	}

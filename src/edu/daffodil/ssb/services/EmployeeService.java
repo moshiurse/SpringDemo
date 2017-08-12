@@ -23,6 +23,10 @@ public class EmployeeService {
 		employeeDao.saveEmployee(employee);
 	}
 	
+	public void deleteEmployee(Employee id) {
+		employeeDao.deleteEmployee(id);
+	}
+	
 	public void updateEmployee(Employee employee) {
 		employeeDao.updateEmployee(employee);
 	}
@@ -36,4 +40,6 @@ public class EmployeeService {
 		
 		return employeeDao.showEmployeeById(empId);
 	}
+
+	
 }

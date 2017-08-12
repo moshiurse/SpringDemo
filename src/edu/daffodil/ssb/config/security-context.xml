@@ -42,7 +42,8 @@
 		<security:intercept-url pattern="/home" access="permitAll" />
 		<security:intercept-url pattern="/welcome" access="isAuthenticated()" />
 		<security:intercept-url pattern="/employee" access="isAuthenticated()" />
-		<security:intercept-url pattern="/saveEmployee" access="isAuthenticated()" />
+		<security:intercept-url pattern="/saveEmployee/{id}" access="isAuthenticated()" />
+		<security:intercept-url pattern="/deleteEmployee" access="isAuthenticated()" />
 		<security:intercept-url pattern="/showEmployeeList" access="isAuthenticated()" />	
 		<security:intercept-url pattern="/showEmployeeById" access="isAuthenticated()" />	
 		<security:intercept-url pattern="/showCountryList" access="isAuthenticated()" />

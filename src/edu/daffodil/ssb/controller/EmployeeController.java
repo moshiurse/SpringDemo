@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -31,14 +32,31 @@ public class EmployeeController {
 		return "employee";
 	}
 	
-	@RequestMapping(value="/saveEmployee",method=RequestMethod.POST)
-	public @ResponseBody String saveEmployee(@RequestBody Employee employee){		
+	@RequestMapping(value="/saveEmployee/{id}",method=RequestMethod.POST)
+	public @ResponseBody String saveEmployee(@RequestBody Employee employee, @PathVariable("id") int id){		
 		
-		employeeService.saveEmployee(employee);
-			
+		if(id < 1) {
+			employeeService.saveEmployee(employee);
+		} else {
+			employee.setId(id);
+			employeeService.updateEmployee(employee);
+		}
 		return "!! Record Saved Successfully";
 	}
 	
+	@RequestMapping(value="/deleteEmployee",method=RequestMethod.POST)
+	public @ResponseBody String deleteEmployee(@RequestParam("id") int id){	
+		
+		Employee employee  = employeeService.showEmployeeById(id);
+		
+		if(employee != null) {
+			employeeService.deleteEmployee(employee);
+		}
+		
+		
+		return "successfully deleted";
+			
+	}
 	@RequestMapping(value="/showEmployeeList",method=RequestMethod.POST)
 	public @ResponseBody List<Employee> showEmployee(){		
 		
@@ -53,4 +71,6 @@ public class EmployeeController {
 		return employeeService.showEmployeeById(empId);
 			
 	}
+	
+	
 }
