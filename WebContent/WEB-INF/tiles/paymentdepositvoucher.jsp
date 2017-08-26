@@ -43,6 +43,7 @@
 </div></div></div>
 
 <div class="panel panel-default">
+<div class="panel panel-body">
 <div class="form-group">
 <div class="col-sm-2" style="padding-top:5px"><label>Voucher ID:</label></div>
 <div class="col-sm-3" style="padding-top:5px"><input type="text" class="form-control"  name="voucherid" id="voucherid"></div></div>
@@ -103,6 +104,7 @@
 <div class="col-sm-2" ></div>
 <div class="col-sm-2" style="padding-top:5px"><label>Credit : </label></div>
 <div class="col-sm-3" style="padding-top:5px"><input type="text" class="form-control" name="credit" id="credit"></div></div>
+</div>
 </div>
 </div>
 </form>
