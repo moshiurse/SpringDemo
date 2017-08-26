@@ -27,6 +27,7 @@
     <link href="<c:url value='/static/css/easy-autocomplete.min.css' />" rel="stylesheet">
     <link href="<c:url value='/static/css/easy-autocomplete.themes.min.css' />" rel="stylesheet">
     <link href="<c:url value='/static/css/jquery-ui.min.css' />" rel="stylesheet">
+    <link href="<c:url value='/static/css/paymentdepositstyle.css' />" rel="stylesheet">
        
     
     <script src="<c:url value='/static/js/jquery-3.1.1.min.js' />"></script>

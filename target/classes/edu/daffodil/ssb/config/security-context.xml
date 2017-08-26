@@ -48,6 +48,8 @@
 		<security:intercept-url pattern="/showEmployeeById" access="isAuthenticated()" />	
 		<security:intercept-url pattern="/showCountryList" access="isAuthenticated()" />
 		<security:intercept-url pattern="/saveUser" access="permitAll" />
+		<security:intercept-url pattern="/paymentdepositvoucher" access="permitAll" />
+		
 		 	
 		
 		<security:intercept-url pattern="/**" access="denyAll" />

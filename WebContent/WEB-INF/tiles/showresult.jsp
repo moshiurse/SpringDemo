@@ -4,13 +4,21 @@ $(document).ready(function(){
 	
 	
 function viewData(){
+	var data[] = {};
+	
+	data["studentid"] = $("#studentid").val();
+	data["marks"] = $("#marks").val();
+	data["grade"] = $("#grade").val();
+	
+	var id = $("#id").val();
+	
 		
-		$.post("showEmployeeList", function(data){
+		$.post("showAllResult", function(data){
 			
-			var dataTable = '<table class="table"><tr><th>ID</th><th>Name</th><th>Address</th></tr>';
+			var dataTable = '<table class="table"><tr><th>ID</th><th>Student ID</th><th>Marks</th></th><th>Grade</th></tr>';
 			
 			for(var key in data){
-				dataTable += '<tr><td>' + data[key].id + '</td><td>' + data[key].name + '</td><td>' + data[key].address + '</td></tr>';
+				dataTable += '<tr><td>' + data[key].id + '</td><td>' + data[key].studentid + '</td><td>' + data[key].marks + '</td><td>' + data[key].grade + '</td></tr>';
 			}
 			
 			dataTable += '</table>';
@@ -62,6 +70,10 @@ function viewData(){
 
 </fieldset>
 </form>
+
+<div id="divDataTable">
+
+</div>
 
 
 

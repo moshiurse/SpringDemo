@@ -28,6 +28,8 @@
 	                <li><a href="${pageContext.request.contextPath}/registration">Registration Info</a></li>
 	                <li><a href="${pageContext.request.contextPath}/studentresult">Student Result</a></li>
 	                <li><a href="${pageContext.request.contextPath}/showresult">Show Result</a></li>
+	               <li><a href="${pageContext.request.contextPath}/paymentdepositvoucher">Payment Deposit Voucher</a></li>
+	                
 	                <li role="separator" class="divider"></li>
 	                <li class="dropdown-header">Reports</li>
 	                
