@@ -49,6 +49,9 @@
 		<security:intercept-url pattern="/showCountryList" access="isAuthenticated()" />
 		<security:intercept-url pattern="/saveUser" access="permitAll" />
 		<security:intercept-url pattern="/paymentdepositvoucher" access="permitAll" />
+		<security:intercept-url pattern="/saveVoucher" access="permitAll" />
+		<security:intercept-url pattern="/showControllHead" access="permitAll" />
+		
 		
 		 	
 		

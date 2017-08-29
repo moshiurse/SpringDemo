@@ -67,15 +67,14 @@
 		                $("#successMessage").html(successData); 
 		                $("#successMessage").removeClass("hidden");
 		                $("#errorMessage").addClass("hidden");
-		                
-		               
-		                      
+		               	       
 		             },
 		             error: function (error) {
 		            	 $("#errorMessage").html("Error: Record Not Saved");
 		            	 $("#errorMessage").removeClass("hidden");
 		                 $("#submit").prop("disabled", false);
 		                 alert(JSON.stringify(error));
+		                 
 		             }
 				}); 
 	

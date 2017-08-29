@@ -51,9 +51,9 @@
 	
 	</definition>
 		
-	<definition name="paymentdepositvoucher" extends="software.base">
-		<put-attribute name="title" value="PaymentdepositVoucher"></put-attribute>
-		<put-attribute name="content" value="/WEB-INF/tiles/paymentdepositvoucher.jsp"></put-attribute>
+	<definition name="voucher" extends="software.base">
+		<put-attribute name="title" value="Voucher"></put-attribute>
+		<put-attribute name="content" value="/WEB-INF/tiles/voucher.jsp"></put-attribute>
 	
 	</definition>	
 </tiles-definitions>
