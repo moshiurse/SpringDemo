@@ -25,10 +25,10 @@ public class VoucherController {
 	}
 
 
-	@RequestMapping("/paymentdepositvoucher")
+	@RequestMapping("/voucher")
 	public String showPaymentDepositVoucher() {
 		
-		return "paymentdepositvoucher";
+		return "voucher";
 	}
 	
 	@RequestMapping(value = "/saveVoucher", method= RequestMethod.POST)

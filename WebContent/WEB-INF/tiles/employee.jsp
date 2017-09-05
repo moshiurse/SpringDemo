@@ -22,7 +22,6 @@
 			if(address == ""){		
 		   	 	$("#errorMessage").html("!! Please enter a address");
 		   	    $("#errorMessage").removeClass("hidden");
-		   	 	
 		   	    $("#successMessage").addClass("hidden");	         	      	 
 		        return false;		                
 			}

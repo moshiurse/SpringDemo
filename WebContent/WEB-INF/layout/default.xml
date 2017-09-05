@@ -56,4 +56,10 @@
 		<put-attribute name="content" value="/WEB-INF/tiles/voucher.jsp"></put-attribute>
 	
 	</definition>	
+	
+	<definition name="chartofaccount" extends="software.base">
+		<put-attribute name="title" value="ChartOfAccount"></put-attribute>
+		<put-attribute name="content" value="/WEB-INF/tiles/chartofaccount.jsp"></put-attribute>
+	
+	</definition>	
 </tiles-definitions>

@@ -20,7 +20,7 @@
 		<security:authentication-provider>
 			<security:jdbc-user-service data-source-ref="dataSource"
 				authorities-by-username-query="select username,authority from authorities where binary username = ?"
-				users-by-username-query="select username,password,fullname from users where binary username = ?" />
+				users-by-username-query="select username,password from users where binary username = ?" />
 		</security:authentication-provider>
 	</security:authentication-manager>
 
@@ -48,9 +48,10 @@
 		<security:intercept-url pattern="/showEmployeeById" access="isAuthenticated()" />	
 		<security:intercept-url pattern="/showCountryList" access="isAuthenticated()" />
 		<security:intercept-url pattern="/saveUser" access="permitAll" />
-		<security:intercept-url pattern="/paymentdepositvoucher" access="permitAll" />
+		<security:intercept-url pattern="/voucher" access="permitAll" />
 		<security:intercept-url pattern="/saveVoucher" access="permitAll" />
 		<security:intercept-url pattern="/showControllHead" access="permitAll" />
+		<security:intercept-url pattern="/chartofaccount" access="permitAll" />
 		
 		
 		 	
