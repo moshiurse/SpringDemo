@@ -56,7 +56,7 @@ public class EmployeeController {
 			
 	}
 	@RequestMapping(value="/showEmployeeList",method=RequestMethod.POST)
-	public @ResponseBody List<Employee> showEmployee(){		
+	public @ResponseBody List<Employee> showEmployee(){	
 		
 		return employeeService.showEmployee();
 			

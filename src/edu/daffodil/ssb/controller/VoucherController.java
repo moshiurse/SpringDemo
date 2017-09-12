@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import edu.daffodil.ssb.dao.ChartOfAccount;
-import edu.daffodil.ssb.dao.Employee;
 import edu.daffodil.ssb.dao.Voucher;
 import edu.daffodil.ssb.services.VoucherService;
 
@@ -31,7 +30,7 @@ public class VoucherController {
 		return "voucher";
 	}
 	
-	@RequestMapping(value = "/saveVoucher", method= RequestMethod.POST)
+	@RequestMapping(value ="/saveVoucher", method= RequestMethod.POST)
 	public @ResponseBody String saveVoucher(@RequestBody Voucher voucher) {
 		VoucherService.saveVoucher(voucher);
 		
@@ -39,9 +38,10 @@ public class VoucherController {
 	}
 	
 	
+	
 	@RequestMapping(value="/showControllHead",method=RequestMethod.POST)
-	public @ResponseBody List<ChartOfAccount> showControllHead(){		
-		
+	public @ResponseBody List<ChartOfAccount> showControllHead(){	
+		System.out.println("request received");
 		return VoucherService.showControllHead();
 			
 	}

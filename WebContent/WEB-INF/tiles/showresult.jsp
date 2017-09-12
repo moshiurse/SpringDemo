@@ -1,3 +1,11 @@
+
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Insert title here</title>
 <script type="text/javascript">
 
 $(document).ready(function(){
@@ -22,7 +30,6 @@ function viewData(){
 			}
 			
 			dataTable += '</table>';
-			
 			$("#divDataTable").html(dataTable);
 		})
 	}
@@ -31,51 +38,38 @@ function viewData(){
 
 </script>
 
-
-
-
-
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
 </head>
 <body>
 
-<form class="form-horizontal">
-<fieldset>
+	<form class="form-horizontal">
+		<fieldset>
 
-<!-- Form Name -->
-<legend>Form Name</legend>
+			<!-- Form Name -->
+			<legend>Show Result</legend>
 
-<!-- Search input-->
-<div class="form-group">
-  <label class="col-md-4 control-label" for="serchresult">Student ID</label>
-  <div class="col-md-4">
-    <input id="serchresult" name="serchresult" type="search" placeholder="Search ID" class="form-control input-md" required="">
-    
-  </div>
-</div>
+			<!-- Search input-->
+			<div class="form-group">
+				<label class="col-md-4 control-label" for="serchresult">Student
+					ID</label>
+				<div class="col-md-4">
+					<input id="serchresult" name="serchresult" type="search"
+						placeholder="Search ID" class="form-control input-md" required="">
 
-<!-- Button -->
-<div class="form-group">
-  <label class="col-md-4 control-label" for="searchbtn"></label>
-  <div class="col-md-4">
-    <button id="searchbtn" name="searchbtn" class="btn btn-primary">Search</button>
-  </div>
-</div>
+				</div>
+			</div>
 
-</fieldset>
-</form>
+			<!-- Button -->
+			<div class="form-group">
+				<label class="col-md-4 control-label" for="searchbtn"></label>
+				<div class="col-md-4">
+					<button id="searchbtn" name="searchbtn" class="btn btn-primary">Search</button>
+				</div>
+			</div>
 
-<div id="divDataTable">
+		</fieldset>
+	</form>
 
-</div>
-
-
+	<div id="divDataTable"></div>
 
 </body>
 </html>

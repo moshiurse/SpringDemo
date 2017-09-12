@@ -41,8 +41,8 @@
 				
 				var data = {};
 				
-				data["name"] = $("#name").val();	
-				data["address"] = $("#address").val();	
+				data["name"] = $("#name").val();
+				data["address"] = $("#address").val();
 				var id = $("#id").val();
 				
 				if( id == ""){

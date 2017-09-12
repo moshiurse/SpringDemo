@@ -27,13 +27,24 @@ public class VoucherDao {
 		session().save(voucher);
 	}
 	
+/*
+	@SuppressWarnings("unchecked")
+	public List<ChartOfAccount> showControllHead(String caName) {
+		
+		String caQuery = "select ca_name from acc_ca where ca_name like '%caName%'";
+		Query query = sessionFactory.getCurrentSession().createQuery(caQuery);
+		// query.setString("company_name", caName + "%");
+		return query.list();
+	}*/
 
+	
 	@SuppressWarnings("unchecked")
 	public List<ChartOfAccount> showControllHead() {
-		
-		DetachedCriteria criteria = DetachedCriteria.forClass(ChartOfAccount.class); 
-		
-		return criteria.getExecutableCriteria(session()).list();
+		System.out.println("inside dao");
+		List<ChartOfAccount> ca;
+		DetachedCriteria criteria = DetachedCriteria.forClass(ChartOfAccount.class); 	
+		ca = criteria.getExecutableCriteria(session()).list();
+		System.out.println(ca.toString());
+		return ca;
 	}
-
 }

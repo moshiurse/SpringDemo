@@ -8,284 +8,336 @@
 <title>Payment Deposit Voucher</title>
 <script type="text/javascript">
 	$(document).ready(function() {
-	
-/* 
-var test =$('#voucher').is(':checked').val();
-		if (test == 1) {
-
-	        $("#credit").prop("disabled", true);
-	        $("#debit").prop("disabled", false);
-	    } else if (test == 2) {
-
-	        $("#debit").prop("disabled", true);
-	        $("#credit").prop("disabled", false);
-	    }
-		*/
 		
-		$("#controllhead").autocomplete({
-		    source: function (request,response){
-		    	$.ajax({
-		    		type: "POST",
-		            url: "/showControllHead",
-		            
-		            dataType: "json",
-		            data: 
-		          });
-		    },
-		    select: function (event, ui) {
-		        $("#controllhead").val(ui.item.value);
-		        return false;
-		        
-		    },
-		    minLength : 1
-		    });
-		
-		function viewControllHead(){
-			
-			$.post("showControllHead", function(data){
-				
-				var data = {};
-				data["ca_name"] = $("#controllhead").val();
-				foreach(var key in data){
-					$("#controllhead").append($("<li>").text(data[key].controllHead+"</li>"));
+					showControllHead();
+
+
+				/* 		 var test =$('#voucher').is(':checked').val();
+						 if (test == 1) {
+
+						 $("#credit").prop("disabled", true);
+						 $("#debit").prop("disabled", false);
+						 } else if (test == 2) {
+
+						 $("#debit").prop("disabled", true);
+						 $("#credit").prop("disabled", false);
+						 }
+						 */
+
+						/* 	
+							 //Data load using jquery autocomplete
+						 function viewControllHead(){
+								
+								$.get("showControllHead", function(data){
+									
+									var data = {};
+									data["company_name"] = $("#controllhead").val();
+									
+											        	
+								});
+							 }
+						 */
+						 
+						
+						 
+				//Data Load to combo box .........	
+				function showControllHead(){
+				 $.post("showControllHead", function(ca){
+					 alert(JSON.stringify(ca));
+					 var option = '<select class="form-control" id="controllhead" name="controllhead"><option value="0">Select</option>';
+					 for(var key in ca){
+				 	  option += '<option value=" '+ca[key].caId+' "> '+ca[key].caName+' </option>'
+				 	  
+					 }
+					 option += '</select>';
+					 $("#controllhead").html(option);
+					 
+				 });
 				}
-				
-				// what to do ?
-						        	
-			})
-		}
-		
-		
-		
-		$('input[name="voucher"]') 
-		.change(function(){ 
-			if( $(this).is(":checked") ){ 
-		        var val = $(this).val(); 
-		        //alert(val)
+			 	 
+						 
+						/* 
+						$('input[name="voucher"]') 
+						.change(function(){ 
+							if( $(this).is(":checked") ){ 
+						        var val = $(this).val(); 
+						        //alert(val)
 
-		        if (val == 1) {
+						        if (val == 1) {
 
-		        $("#credit").prop("disabled", true);
-		        $("#debit").prop("disabled", false);
-		    } else if (val == 2) {
+						        $("#credit").prop("disabled", true);
+						        $("#debit").prop("disabled", false);
+						    } else if (val == 2) {
 
-		        $("#debit").prop("disabled", true);
-		        $("#credit").prop("disabled", false);
-		    }
-		    }
-		});
+						        $("#debit").prop("disabled", true);
+						        $("#credit").prop("disabled", false);
+						    }
+						    }
+						});
 
 
-		 $('input[name="transaction"]') 
-		.change(function(){ 
-		    if( $(this).is(":checked") ){ 
-		        var val = $(this).val(); 
-		      if (val == 1) {
+						 $('input[name="transaction"]') 
+						.change(function()
+								{ 
+						    if( $(this).is(":checked") ){ 
+						        var val = $(this).val(); 
+						      if (val == 1) {
 
-		            $("#bankacc").prop("disabled", true);
-		            $("#chequeno").prop("disabled", true);
-		            $("#cashinhand").prop("disabled", false);
-		        }
+						            $("#bankacc").prop("disabled", true);
+						            $("#chequeno").prop("disabled", true);
+						            $("#cashinhand").prop("disabled", false);
+						        }
 
-		        if (val == 2) {
+						        if (val == 2) {
 
-		            $("#cashinhand").prop("disabled", true);
-		            $("#bankacc").prop("disabled", false);
-		            $("#chequeno").prop("disabled", false);
-		        }
-		    }
-		});
-		
-	/*	
-		$(".voucher").on( "click", function(event) {
-			var target = $( event.target );
-	        if (target.is(":checked")) {
-	            check = target.val();
-	            alert(check);
-	            if (check == 1) {
+						            $("#cashinhand").prop("disabled", true);
+						            $("#bankacc").prop("disabled", false);
+						            $("#chequeno").prop("disabled", false);
+						        }
+						    }
+						});
+						 */
+						 
+						/*	
+							$(".voucher").on( "click", function(event) {
+								var target = $( event.target );
+						        if (target.is(":checked")) {
+						            check = target.val();
+						            alert(check);
+						            if (check == 1) {
 
-	                $("#credit").prop("disabled", true);
-	                $("#debit").prop("disabled", false);
-	            } else if (check == 2) {
+						                $("#credit").prop("disabled", true);
+						                $("#debit").prop("disabled", false);
+						            } else if (check == 2) {
 
-	                $("#debit").prop("disabled", true);
-	                $("#credit").prop("disabled", false);
-	            }
-	        }
-	    });
-		
-		 $(".transaction").click(function(event) {
-		     var target = $( event.target );
-		        if (target.is(":checked")) {
-		            checktransaction = target.val();
-		            alert(checktransaction);
-		            if (checktransaction == 1) {
+						                $("#debit").prop("disabled", true);
+						                $("#credit").prop("disabled", false);
+						            }
+						        }
+						    });
+							
+							 $(".transaction").click(function(event) {
+							     var target = $( event.target );
+							        if (target.is(":checked")) {
+							            checktransaction = target.val();
+							            alert(checktransaction);
+							            if (checktransaction == 1) {
 
-		                $("#bankacc").prop("disabled", true);
-		                $("#chequeno").prop("disabled", true);
-		                $("#cashinhand").prop("disabled", false);
-		            }
+							                $("#bankacc").prop("disabled", true);
+							                $("#chequeno").prop("disabled", true);
+							                $("#cashinhand").prop("disabled", false);
+							            }
 
-		            if (checktransaction == 2) {
+							            if (checktransaction == 2) {
 
-		                $("#cashinhand").prop("disabled", true);
-		                $("#bankacc").prop("disabled", false);
-		                $("#chequeno").prop("disabled", false);
-		            }
-		        }
-		    });
-		 */
-		
-		$("#finish").click(function(event) {
-			event.preventDefault();
+							                $("#cashinhand").prop("disabled", true);
+							                $("#bankacc").prop("disabled", false);
+							                $("#chequeno").prop("disabled", false);
+							            }
+							        }
+							    });
+						 */
 
-			if (validator()) {
-				var data = {};
+	$("#finish")
+			.click(
+				function(event) {
+						event.preventDefault();
 
-				data["voucher"] = $("#voucher").val();
-				data["transaction"] = $("#transaction").val();
-				data["voucher_id"] = $("#voucherid").val();
-				data["date"] = $("#date").val();
-				data["project"] = $("#project").val();
-				data["department"] = $("#department").val();
-				data["cash_in_hand"] = $("#cashinhand").val();
-				data["bank_account"] = $("bankacc").val();
-				data["cheque_no"] = $("#chequeno").val();
-				data["mr_no"] = $("#mrno").val();
-				data["controll_head"] = $("#controllhead").val();
-				data["client"] = $("#client").val();
-				data["debit"] = $("#debit").val();
-				data["credit"] = $("#credit").val();
+						if (validator()) {
+							var data = {};
 
-				$.ajax({
-					type : "POST",
-					url : "/saveVoucher",
-					data : JSON.stringify(data),
-					contentType : "application/json; charset=utf-8",
-					success : function(successData) {
-						$("#successMessage").html(successData);
-						$("#successMessage").removeClass("hidden");
-						$("#errorMessage").addClass("hidden");
-					},
-					error : function(error) {
-						$("#errorMessage").html("Error: Record Not Saved");
-						$("#errorMessage").removeClass("hidden");
-						$("#submit").prop("disabled", false);
-						alert(JSON.stringify(error));
-					}
+							data["voucher"] = $("#voucher")
+									.val();
+							data["transaction"] = $(
+									"#transaction").val();
+							data["voucher_id"] = $(
+									"#voucherid").val();
+							data["date"] = $("#date").val();
+							data["project"] = $("#project")
+									.val();
+							data["department"] = $(
+									"#department").val();
+							data["cash_in_hand"] = $(
+									"#cashinhand").val();
+							data["bank_account"] = $(
+									"bankacc").val();
+							data["cheque_no"] = $(
+									"#chequeno").val();
+							data["mr_no"] = $("#mrno")
+									.val();
+							data["controll_head"] = $(
+									"#controllhead").val();
+							//data["client"] = $("#client").val();
+							data["debit"] = $("#debit")
+									.val();
+							data["credit"] = $("#credit")
+									.val();
 
-				});
+					$
+							.ajax({
+								type : "POST",
+								url : "/saveVoucher",
+								data : JSON
+										.stringify(data),
+								contentType : "application/json; charset=utf-8",
+								success : function(
+										successData) {
+									$(
+											"#successMessage")
+											.html(
+													successData);
+									$(
+											"#successMessage")
+											.removeClass(
+													"hidden");
+									$(
+											"#errorMessage")
+											.addClass(
+													"hidden");
+								},
+								error : function(
+										error) {
+									$(
+											"#errorMessage")
+											.html(
+													"Error: Record Not Saved");
+									$(
+											"#errorMessage")
+											.removeClass(
+													"hidden");
+									$("#submit")
+											.prop(
+													"disabled",
+													false);
+									alert(JSON
+											.stringify(error));
+								}
 
-			}
+							});
 
-		});
+				}
 
-		function validator() {
+			});
 
-			var voucher = $.trim($("#voucher").val());
-			var transaction = $.trim($("#transaction").val());
-			var voucherId = $.trim($("#voucherid").val());
-			var date = $.trim($("#date").val());
-			var project = $.trim($("#project").val());
-			var department = $.trim($("#department").val());
-			var cashInHand = $.trim($("#cashinhand").val());
-			var bankAcc = $.trim($("#bankacc").val());
-			var chequeNo = $.trim($("#chequeno").val());
-			var mrNo = $.trim($("#mrno").val());
-			var controllHead = $.trim($("#controllhead").val());
-			var client = $.trim($("#client").val());
-			var debit = $.trim($("#debit").val());
-			var credit = $.trim($("#credit").val())
+						function validator() {
 
-			if (voucher == 0) {
-				$("#errorMessage").html("!! You must check a voucher type!!");
-				$("#errorMessage").removeClass("hidden");
-				$("#successMessage").addClass("hidden");
-				return false;
-			}
-			if (transaction == 0) {
-				$("#errorMessage").html("You must check a transaction type!!");
-				$("#errorMessage").removeClass("hidden");
-				$("#successMessage").addClass("hidden");
-				return false;
-			}
-			if (voucherId == "") {
-				$("#errorMessage").html("!! Please enter a voucher ID");
-				$("#errorMessage").removeClass("hidden");
-				$("#successMessage").addClass("hidden");
-				return false;
-			}
-			if (date == "") {
-				$("#errorMessage").html("!! Please enter Date");
-				$("#errorMessage").removeClass("hidden");
-				$("#successMessage").addClass("hidden");
-				return false;
-			}
-			if (project == "") {
-				$("#errorMessage").html("!! Please enter your project!!");
-				$("#errorMessage").removeClass("hidden");
-				$("#successMessage").addClass("hidden");
-				return false;
-			}
-			if (department == "") {
-				$("#errorMessage").html("!! Please enter your Department");
-				$("#errorMessage").removeClass("hidden");
-				$("#successMessage").addClass("hidden");
-				return false;
-			}
-			if (cashInHand == "") {
-				$("#errorMessage").html("!! Please enter Cash in Hand Amount");
-				$("#errorMessage").removeClass("hidden");
-				$("#successMessage").addClass("hidden");
-				return false;
-			}
-			if (bankAcc == "") {
-				$("#errorMessage").html("Please enter Bank Account!!");
-				$("#errorMessage").removeClass("hidden");
-				$("#successMessage").addClass("hidden");
-				return false;
-			}
-			if (chequeNo == "") {
-				$("#errorMessage").html("!!Please enter Cheque no!!");
-				$("#errorMessage").removeClass("hidden");
-				$("#successMessage").addClass("hidden");
-				return false;
-			}
-			if (mrNo == "") {
-				$("#errorMessage").html("Please enter MR No !!");
-				$("#errorMessage").removeClass("hidden");
-				$("#successMessage").addClass("hidden");
-				return false;
-			}
-			if (controllHead == "") {
-				$("#errorMessage").html("!! Please enter Control Head !!");
-				$("#errorMessage").removeClass("hidden");
-				$("#successMessage").addClass("hidden");
-				return false;
-			}
-			if (client == "") {
-				$("#errorMessage").html("Please enter Client Infor!!");
-				$("#errorMessage").removeClass("hidden");
-				$("#successMessage").addClass("hidden");
-				return false;
-			}
-			if (debit == "") {
-				$("#errorMessage").html("Please enter your Debit balance!!");
-				$("#errorMessage").removeClass("hidden");
-				$("#successMessage").addClass("hidden");
-				return false;
-			}
-			if (credit == "") {
-				$("#errorMessage").html("Please enter your credit balance!!");
-				$("#errorMessage").removeClass("hidden");
-				$("#successMessage").addClass("hidden");
-				return false;
-			}
+							var voucher = $.trim($("#voucher").val());
+							var transaction = $.trim($("#transaction").val());
+							var voucherId = $.trim($("#voucherid").val());
+							var date = $.trim($("#date").val());
+							var project = $.trim($("#project").val());
+							var department = $.trim($("#department").val());
+							var cashInHand = $.trim($("#cashinhand").val());
+							var bankAcc = $.trim($("#bankacc").val());
+							var chequeNo = $.trim($("#chequeno").val());
+							var mrNo = $.trim($("#mrno").val());
+							var controllHead = $.trim($("#controllhead").val());
+							//var client = $.trim($("#client").val());
+							var debit = $.trim($("#debit").val());
+							var credit = $.trim($("#credit").val())
 
-			return true;
-		}
+							if (voucher == 0) {
+								$("#errorMessage").html(
+										"!! You must check a voucher type!!");
+								$("#errorMessage").removeClass("hidden");
+								$("#successMessage").addClass("hidden");
+								return false;
+							}
+							if (transaction == 0) {
+								$("#errorMessage").html(
+										"You must check a transaction type!!");
+								$("#errorMessage").removeClass("hidden");
+								$("#successMessage").addClass("hidden");
+								return false;
+							}
+							if (voucherId == "") {
+								$("#errorMessage").html(
+										"!! Please enter a voucher ID");
+								$("#errorMessage").removeClass("hidden");
+								$("#successMessage").addClass("hidden");
+								return false;
+							}
+							if (date == "") {
+								$("#errorMessage").html("!! Please enter Date");
+								$("#errorMessage").removeClass("hidden");
+								$("#successMessage").addClass("hidden");
+								return false;
+							}
+							if (project == "") {
+								$("#errorMessage").html(
+										"!! Please enter your project!!");
+								$("#errorMessage").removeClass("hidden");
+								$("#successMessage").addClass("hidden");
+								return false;
+							}
+							if (department == "") {
+								$("#errorMessage").html(
+										"!! Please enter your Department");
+								$("#errorMessage").removeClass("hidden");
+								$("#successMessage").addClass("hidden");
+								return false;
+							}
+							if (cashInHand == "") {
+								$("#errorMessage").html(
+										"!! Please enter Cash in Hand Amount");
+								$("#errorMessage").removeClass("hidden");
+								$("#successMessage").addClass("hidden");
+								return false;
+							}
+							if (bankAcc == "") {
+								$("#errorMessage").html(
+										"Please enter Bank Account!!");
+								$("#errorMessage").removeClass("hidden");
+								$("#successMessage").addClass("hidden");
+								return false;
+							}
+							if (chequeNo == "") {
+								$("#errorMessage").html(
+										"!!Please enter Cheque no!!");
+								$("#errorMessage").removeClass("hidden");
+								$("#successMessage").addClass("hidden");
+								return false;
+							}
+							if (mrNo == "") {
+								$("#errorMessage")
+										.html("Please enter MR No !!");
+								$("#errorMessage").removeClass("hidden");
+								$("#successMessage").addClass("hidden");
+								return false;
+							}
+							if (controllHead == "") {
+								$("#errorMessage").html(
+										"!! Please enter Control Head !!");
+								$("#errorMessage").removeClass("hidden");
+								$("#successMessage").addClass("hidden");
+								return false;
+							}
+							/* if (client == "") {
+								$("#errorMessage").html(
+										"Please enter Client Infor!!");
+								$("#errorMessage").removeClass("hidden");
+								$("#successMessage").addClass("hidden");
+								return false;
+							} */
+							if (debit == "") {
+								$("#errorMessage").html(
+										"Please enter your Debit balance!!");
+								$("#errorMessage").removeClass("hidden");
+								$("#successMessage").addClass("hidden");
+								return false;
+							}
+							if (credit == "") {
+								$("#errorMessage").html(
+										"Please enter your credit balance!!");
+								$("#errorMessage").removeClass("hidden");
+								$("#successMessage").addClass("hidden");
+								return false;
+							}
 
-	});
+							return true;
+						}
+
+					});
 </script>
 
 </head>
@@ -316,7 +368,8 @@ var test =$('#voucher').is(':checked').val();
 
 								<input type="radio" class="voucher" name="voucher" value="1"
 									checked="checked">Payment Voucher <input type="radio"
-									name="voucher" class="voucher" value="2">Receive Voucher
+									name="voucher" class="voucher" value="2">Receive
+								Voucher
 							</div>
 							<div class="col-sm-3" style="padding-bottom: 5px;"></div>
 							<div class="col-sm-3" style="padding-bottom: 5px;">
@@ -418,16 +471,14 @@ var test =$('#voucher').is(':checked').val();
 								<div class="col-sm-2" style="padding-top: 5px">
 									<label>Controll Head : </label>
 								</div>
-								<div class="col-sm-10" style="padding-top: 5px">
-									<input type="text" class="form-control" name="controllhead"
-										id="controllhead">
+								<div class="col-sm-10" id="controllhead">
 								</div>
 							</div>
 
-							<div class="form-group">
+							 <!-- <div class="form-group">
 								<div class="col-sm-2" style="padding-top: 5px">
 									<label>Client :</label>
-								</div>
+								</div>  
 								<div class="col-sm-10" style="padding-top: 5px">
 									<select name="client" class="form-control" id="client">
 										<option value="">Select...</option>
@@ -436,7 +487,7 @@ var test =$('#voucher').is(':checked').val();
 										<option value="EEE">EEE</option>
 									</select>
 								</div>
-							</div>
+							</div> -->
 
 							<div class="form-group">
 								<div class="col-sm-2" style="padding-top: 5px">
@@ -489,10 +540,12 @@ var test =$('#voucher').is(':checked').val();
 			<div class="panel panel-body">
 				<div class="col-sm-3"></div>
 				<div class="col-sm-3">
-					<input type="text" name="debitbal" id="debitbal">
+					<input type="text" class="form-control" name="debitbal"
+						id="debitbal">
 				</div>
 				<div class="col-sm-3">
-					<input type="text" name="creditbal" id="creditbal">
+					<input type="text" class="form-control" name="creditbal"
+						id="creditbal">
 				</div>
 				<div class="col-sm-3" style="padding-bottom: 5px">
 					<input type="submit" class="btn btn-lg btn-success" name="finish"
@@ -506,8 +559,8 @@ var test =$('#voucher').is(':checked').val();
 					<label>Narration: </label>
 				</div>
 				<div class="col-sm-10">
-					<input type="text" name="narration" id="narration"
-						class="col-sm-10">
+					<input type="text" class="form-control" name="narration"
+						id="narration" class="col-sm-10">
 				</div>
 			</div>
 		</div>
@@ -532,8 +585,8 @@ var test =$('#voucher').is(':checked').val();
 					<div class="col-sm-10">
 						<div class="col-sm-4"></div>
 						<div class="col-sm-4">
-							<input type="text" name="search" id="search" placeholder="SEARCH"
-								class="col-sm-12">
+							<input type="text" name="search" class="form-control" id="search"
+								placeholder="SEARCH" class="col-sm-12">
 						</div>
 						<div class="col-sm-4"></div>
 
@@ -561,10 +614,9 @@ var test =$('#voucher').is(':checked').val();
 				<div class="col-sm-10">
 					<div class="col-sm-4"></div>
 					<div class="col-sm-4">
-						<h4>&copy;MoshiurRahman</h4>
+						<h4>&copy;Moshiur Rahman</h4>
 					</div>
 					<div class="col-sm-4"></div>
-
 				</div>
 			</div>
 
