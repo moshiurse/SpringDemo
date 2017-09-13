@@ -7,218 +7,241 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Payment Deposit Voucher</title>
 <script type="text/javascript">
+// ------------------- Start document.ready()---------------------------
 	$(document).ready(function() {
+			
+		// ------------------Start Calling all functions--------------------------
+			showControllHead();
+			radioCheck();
+			firstcheck();
+		// ------------------- End of Calling all methods ------------------------	
 		
-					showControllHead();
+		//----------------Start - Datepicker For Date Input-------------------
+		$(function(){
+			$("#date").datepicker();
+		});
+		
+		//--------------End of - Datepicker---------
+			
+		// First Checked value functionality...
+		function firstcheck(){
+			
+			var vouchervalue = $("input[name='voucher']:checked").val();
+			
+			if(vouchervalue == 1){
+				$("#credit").prop("disabled", true);
+		        $("#debit").prop("disabled", false);
+			}
+			if(vouchervalue == 2){
+		        $("#debit").prop("disabled", true);
+		        $("#credit").prop("disabled", false);
+			}
+			
+			var transactionvalue = $("input[name='transaction']:checked").val();
+			
+			if(transactionvalue == 1){
+				$("#bankacc").prop("disabled", true);
+	            $("#chequeno").prop("disabled", true);
+	            $("#cashinhand").prop("disabled", false);
+			}
+			if(transactionvalue == 2){
+				$("#cashinhand").prop("disabled", true);
+	            $("#bankacc").prop("disabled", false);
+	            $("#chequeno").prop("disabled", false);
+			}
+		
+		}
+		//Finished First Checked value functionality...
 
-
-				/* 		 var test =$('#voucher').is(':checked').val();
-						 if (test == 1) {
-
-						 $("#credit").prop("disabled", true);
-						 $("#debit").prop("disabled", false);
-						 } else if (test == 2) {
-
-						 $("#debit").prop("disabled", true);
-						 $("#credit").prop("disabled", false);
-						 }
-						 */
-
-						/* 	
-							 //Data load using jquery autocomplete
-						 function viewControllHead(){
+		//--------------------Start - Data Load to combo box----------------------
+		function showControllHead() {
+			$.post("showControllHead",function(ca) {
 								
-								$.get("showControllHead", function(data){
-									
-									var data = {};
-									data["company_name"] = $("#controllhead").val();
-									
-											        	
-								});
-							 }
-						 */
-						 
-						
-						 
-				//Data Load to combo box .........	
-				function showControllHead(){
-				 $.post("showControllHead", function(ca){
-					 alert(JSON.stringify(ca));
-					 var option = '<select class="form-control" id="controllhead" name="controllhead"><option value="0">Select</option>';
-					 for(var key in ca){
-				 	  option += '<option value=" '+ca[key].caId+' "> '+ca[key].caName+' </option>'
-				 	  
-					 }
-					 option += '</select>';
-					 $("#controllhead").html(option);
-					 
-				 });
+				var option = '<select class="form-control" id="controllhead" name="controllhead"><option value="0">Select</option>';
+				for (var key in ca) {
+					option += '<option value="'+ca[key].caName+'"> '+
+					ca[key].caName+ ' </option>';
 				}
-			 	 
-						 
-						/* 
-						$('input[name="voucher"]') 
-						.change(function(){ 
-							if( $(this).is(":checked") ){ 
-						        var val = $(this).val(); 
-						        //alert(val)
-
-						        if (val == 1) {
-
-						        $("#credit").prop("disabled", true);
-						        $("#debit").prop("disabled", false);
-						    } else if (val == 2) {
-
-						        $("#debit").prop("disabled", true);
-						        $("#credit").prop("disabled", false);
-						    }
-						    }
-						});
-
-
-						 $('input[name="transaction"]') 
-						.change(function()
-								{ 
-						    if( $(this).is(":checked") ){ 
-						        var val = $(this).val(); 
-						      if (val == 1) {
-
-						            $("#bankacc").prop("disabled", true);
-						            $("#chequeno").prop("disabled", true);
-						            $("#cashinhand").prop("disabled", false);
-						        }
-
-						        if (val == 2) {
-
-						            $("#cashinhand").prop("disabled", true);
-						            $("#bankacc").prop("disabled", false);
-						            $("#chequeno").prop("disabled", false);
-						        }
-						    }
-						});
-						 */
-						 
-						/*	
-							$(".voucher").on( "click", function(event) {
-								var target = $( event.target );
-						        if (target.is(":checked")) {
-						            check = target.val();
-						            alert(check);
-						            if (check == 1) {
-
-						                $("#credit").prop("disabled", true);
-						                $("#debit").prop("disabled", false);
-						            } else if (check == 2) {
-
-						                $("#debit").prop("disabled", true);
-						                $("#credit").prop("disabled", false);
-						            }
-						        }
-						    });
-							
-							 $(".transaction").click(function(event) {
-							     var target = $( event.target );
-							        if (target.is(":checked")) {
-							            checktransaction = target.val();
-							            alert(checktransaction);
-							            if (checktransaction == 1) {
-
-							                $("#bankacc").prop("disabled", true);
-							                $("#chequeno").prop("disabled", true);
-							                $("#cashinhand").prop("disabled", false);
-							            }
-
-							            if (checktransaction == 2) {
-
-							                $("#cashinhand").prop("disabled", true);
-							                $("#bankacc").prop("disabled", false);
-							                $("#chequeno").prop("disabled", false);
-							            }
-							        }
-							    });
-						 */
-
-	$("#finish")
-			.click(
-				function(event) {
-						event.preventDefault();
-
-						if (validator()) {
-							var data = {};
-
-							data["voucher"] = $("#voucher")
-									.val();
-							data["transaction"] = $(
-									"#transaction").val();
-							data["voucher_id"] = $(
-									"#voucherid").val();
-							data["date"] = $("#date").val();
-							data["project"] = $("#project")
-									.val();
-							data["department"] = $(
-									"#department").val();
-							data["cash_in_hand"] = $(
-									"#cashinhand").val();
-							data["bank_account"] = $(
-									"bankacc").val();
-							data["cheque_no"] = $(
-									"#chequeno").val();
-							data["mr_no"] = $("#mrno")
-									.val();
-							data["controll_head"] = $(
-									"#controllhead").val();
-							//data["client"] = $("#client").val();
-							data["debit"] = $("#debit")
-									.val();
-							data["credit"] = $("#credit")
-									.val();
-
-					$
-							.ajax({
-								type : "POST",
-								url : "/saveVoucher",
-								data : JSON
-										.stringify(data),
-								contentType : "application/json; charset=utf-8",
-								success : function(
-										successData) {
-									$(
-											"#successMessage")
-											.html(
-													successData);
-									$(
-											"#successMessage")
-											.removeClass(
-													"hidden");
-									$(
-											"#errorMessage")
-											.addClass(
-													"hidden");
-								},
-								error : function(
-										error) {
-									$(
-											"#errorMessage")
-											.html(
-													"Error: Record Not Saved");
-									$(
-											"#errorMessage")
-											.removeClass(
-													"hidden");
-									$("#submit")
-											.prop(
-													"disabled",
-													false);
-									alert(JSON
-											.stringify(error));
-								}
-
-							});
-
-				}
+				option += '</select>';
+				$("#controllheaddiv").html(option);
+				
 
 			});
+		}
+					 
+	 //---------------------- End of Data Load to combo box Task Complete-------------------
+		 
+	 //----------------Start- Disable some input after Click RadioButton-------------------
+		 		function radioCheck() {
+					$('input[name="voucher"]') 
+					.change(function(){ 
+						if( $(this).is(":checked") ){ 
+					        var val = $(this).val(); 
 
+					        if (val == 1) {
+							
+					        $("#credit").prop("disabled", true);
+					        $("#debit").prop("disabled", false);
+					    } else if (val == 2) {
+							
+					        $("#debit").prop("disabled", true);
+					        $("#credit").prop("disabled", false);
+					    }
+					    }
+					});
+
+
+					 $('input[name="transaction"]') 
+					.change(function()
+							{ 
+					    if( $(this).is(":checked") ){ 
+					        var val = $(this).val(); 
+					      if (val == 1) {
+
+					            $("#bankacc").prop("disabled", true);
+					            $("#chequeno").prop("disabled", true);
+					            $("#cashinhand").prop("disabled", false);
+					        }
+
+					        if (val == 2) {
+
+					            $("#cashinhand").prop("disabled", true);
+					            $("#bankacc").prop("disabled", false);
+					            $("#chequeno").prop("disabled", false);
+					        }
+					    }
+					});
+	 } 
+					 
+	// ---------------End of - Disable some input after Click RadioButton--------------------
+
+			/*	
+				$(".voucher").on( "click", function(event) {
+					var target = $( event.target );
+			        if (target.is(":checked")) {
+			            check = target.val();
+			            alert(check);
+			            if (check == 1) {
+
+			                $("#credit").prop("disabled", true);
+			                $("#debit").prop("disabled", false);
+			            } else if (check == 2) {
+
+			                $("#debit").prop("disabled", true);
+			                $("#credit").prop("disabled", false);
+			            }
+			        }
+			    });
+				
+				 $(".transaction").click(function(event) {
+				     var target = $( event.target );
+				        if (target.is(":checked")) {
+				            checktransaction = target.val();
+				            alert(checktransaction);
+				            if (checktransaction == 1) {
+
+				                $("#bankacc").prop("disabled", true);
+				                $("#chequeno").prop("disabled", true);
+				                $("#cashinhand").prop("disabled", false);
+				            }
+
+				            if (checktransaction == 2) {
+
+				                $("#cashinhand").prop("disabled", true);
+				                $("#bankacc").prop("disabled", false);
+				                $("#chequeno").prop("disabled", false);
+				            }
+				        }
+				    });
+			 */
+			 
+			 
+		// ------------------- Start- Save Button function----------------------------- 
+		 	$("#save").click(function(event){
+			 
+				var data = {};
+				data["voucherNo"] = $("#voucher").val();
+				data["voucherDate"] = $("#date").val();
+				data["narration"] = $("#narration").val();
+				data["voucherNo"] = $("#voucher").val();
+				data["voucherNo"] = $("#voucher").val();
+				data["voucherNo"] = $("#voucher").val();
+				data["voucherNo"] = $("#voucher").val();
+				data["voucherNo"] = $("#voucher").val();
+				var voucher = $.trim($("#voucher").val());
+				var transaction = $.trim($("#transaction").val());
+				var voucherId = $.trim($("#voucherid").val());
+				var date = $.trim($("#date").val());
+				var project = $.trim($("#project").val());
+				var department = $.trim($("#department").val());
+				var cashInHand = $.trim($("#cashinhand").val());
+				var bankAcc = $.trim($("#bankacc").val());
+				var chequeNo = $.trim($("#chequeno").val());
+				var mrNo = $.trim($("#mrno").val());
+				var controllHead = $.trim($("#controllhead").val());
+				var debit = $.trim($("#debit").val());
+				var credit = $.trim($("#credit").val());
+				
+				var dataTable = '<tr><td>'+controllHead+'</td><td>'+debit+'</td><td>'+credit
+				+'</td><td>'+chequeNo+'</td><td>'+project
+				+'</td><td>'+mrNo+'</td><td>'+department
+				+'</td></tr>';
+				dataTable += '</table>';
+				
+				$("#showtable").append(dataTable);
+
+		 })
+		 
+		 // ---------------- End of - Save Button function----------------------
+						 
+						 
+		// ------------------------Start- Finish Button -----------------
+		$("#finish").click(function(event) {
+			event.preventDefault();
+
+				if (validator()) {
+					var data = {};
+
+					data["voucher"] = $("#voucher").val();
+					data["transaction"] = $("#transaction").val();
+					data["voucher_id"] = $("#voucherid").val();
+					data["date"] = $("#date").val();
+					data["project"] = $("#project").val();
+					data["department"] = $("#department").val();
+					data["cash_in_hand"] = $("#cashinhand").val();
+					data["bank_account"] = $("bankacc").val();
+					data["cheque_no"] = $("#chequeno").val();
+					data["mr_no"] = $("#mrno").val();
+					data["controll_head"] = $("#controllhead").val();
+					data["debit"] = $("#debit").val();
+					data["credit"] = $("#credit").val();
+					alert(JSON.stringify(error));
+
+						$.ajax({
+							type : "POST",
+							url : "/saveVoucher",
+							data : JSON.stringify(data),
+							contentType : "application/json; charset=utf-8",
+							success : function(
+									successData) {
+								$("#successMessage").html(successData);
+								$("#successMessage").removeClass("hidden");
+								$("#errorMessage").addClass("hidden");
+							},
+							error : function(
+									error) {
+								$("#errorMessage").html("Error: Record Not Saved");
+								$("#errorMessage").removeClass("hidden");
+								$("#submit").prop("disabled",false);
+								alert(JSON.stringify(error));
+							}
+
+						});
+					}
+				});
+		 // ----------------------End of - Finish Button -----------------------
+
+		 // --------------------- Start Validator Function-----------------------
 						function validator() {
 
 							var voucher = $.trim($("#voucher").val());
@@ -232,27 +255,23 @@
 							var chequeNo = $.trim($("#chequeno").val());
 							var mrNo = $.trim($("#mrno").val());
 							var controllHead = $.trim($("#controllhead").val());
-							//var client = $.trim($("#client").val());
 							var debit = $.trim($("#debit").val());
 							var credit = $.trim($("#credit").val())
 
 							if (voucher == 0) {
-								$("#errorMessage").html(
-										"!! You must check a voucher type!!");
+								$("#errorMessage").html("!! You must check a voucher type!!");
 								$("#errorMessage").removeClass("hidden");
 								$("#successMessage").addClass("hidden");
 								return false;
 							}
 							if (transaction == 0) {
-								$("#errorMessage").html(
-										"You must check a transaction type!!");
+								$("#errorMessage").html("You must check a transaction type!!");
 								$("#errorMessage").removeClass("hidden");
 								$("#successMessage").addClass("hidden");
 								return false;
 							}
 							if (voucherId == "") {
-								$("#errorMessage").html(
-										"!! Please enter a voucher ID");
+								$("#errorMessage").html("!! Please enter a voucher ID");
 								$("#errorMessage").removeClass("hidden");
 								$("#successMessage").addClass("hidden");
 								return false;
@@ -264,80 +283,66 @@
 								return false;
 							}
 							if (project == "") {
-								$("#errorMessage").html(
-										"!! Please enter your project!!");
+								$("#errorMessage").html("!! Please enter your project!!");
 								$("#errorMessage").removeClass("hidden");
 								$("#successMessage").addClass("hidden");
 								return false;
 							}
 							if (department == "") {
-								$("#errorMessage").html(
-										"!! Please enter your Department");
+								$("#errorMessage").html("!! Please enter your Department");
 								$("#errorMessage").removeClass("hidden");
 								$("#successMessage").addClass("hidden");
 								return false;
 							}
-							if (cashInHand == "") {
-								$("#errorMessage").html(
-										"!! Please enter Cash in Hand Amount");
+							/* if (cashInHand == "") {
+								$("#errorMessage").html("!! Please enter Cash in Hand Amount");
 								$("#errorMessage").removeClass("hidden");
 								$("#successMessage").addClass("hidden");
 								return false;
 							}
 							if (bankAcc == "") {
-								$("#errorMessage").html(
-										"Please enter Bank Account!!");
+								$("#errorMessage").html("Please enter Bank Account!!");
 								$("#errorMessage").removeClass("hidden");
 								$("#successMessage").addClass("hidden");
 								return false;
 							}
 							if (chequeNo == "") {
-								$("#errorMessage").html(
-										"!!Please enter Cheque no!!");
+								$("#errorMessage").html("!!Please enter Cheque no!!");
 								$("#errorMessage").removeClass("hidden");
 								$("#successMessage").addClass("hidden");
 								return false;
-							}
+							} */
 							if (mrNo == "") {
-								$("#errorMessage")
-										.html("Please enter MR No !!");
+								$("#errorMessage").html("Please enter MR No !!");
 								$("#errorMessage").removeClass("hidden");
 								$("#successMessage").addClass("hidden");
 								return false;
 							}
 							if (controllHead == "") {
-								$("#errorMessage").html(
-										"!! Please enter Control Head !!");
+								$("#errorMessage").html("!! Please enter Control Head !!");
 								$("#errorMessage").removeClass("hidden");
 								$("#successMessage").addClass("hidden");
 								return false;
 							}
-							/* if (client == "") {
-								$("#errorMessage").html(
-										"Please enter Client Infor!!");
-								$("#errorMessage").removeClass("hidden");
-								$("#successMessage").addClass("hidden");
-								return false;
-							} */
-							if (debit == "") {
-								$("#errorMessage").html(
-										"Please enter your Debit balance!!");
+							/* if (debit == "") {
+								$("#errorMessage").html("Please enter your Debit balance!!");
 								$("#errorMessage").removeClass("hidden");
 								$("#successMessage").addClass("hidden");
 								return false;
 							}
 							if (credit == "") {
-								$("#errorMessage").html(
-										"Please enter your credit balance!!");
+								$("#errorMessage").html("Please enter your credit balance!!");
 								$("#errorMessage").removeClass("hidden");
 								$("#successMessage").addClass("hidden");
 								return false;
-							}
+							} */
 
 							return true;
 						}
+		 //--------------------End of Validation function--------------------------
 
 					});
+		// ----------------- End of Document.ready()-----------------------------
 </script>
 
 </head>
@@ -471,23 +476,9 @@
 								<div class="col-sm-2" style="padding-top: 5px">
 									<label>Controll Head : </label>
 								</div>
-								<div class="col-sm-10" id="controllhead">
+								<div class="col-sm-10" id="controllheaddiv">
 								</div>
 							</div>
-
-							 <!-- <div class="form-group">
-								<div class="col-sm-2" style="padding-top: 5px">
-									<label>Client :</label>
-								</div>  
-								<div class="col-sm-10" style="padding-top: 5px">
-									<select name="client" class="form-control" id="client">
-										<option value="">Select...</option>
-										<option value="SWE">SWE</option>
-										<option value="CSE">CSE</option>
-										<option value="EEE">EEE</option>
-									</select>
-								</div>
-							</div> -->
 
 							<div class="form-group">
 								<div class="col-sm-2" style="padding-top: 5px">
@@ -508,6 +499,13 @@
 										id="credit">
 								</div>
 							</div>
+
+							<div class="form-group">
+								<div class="col-md-8 col-md-offset-4" style="padding-top: 5px">
+									<input type="submit" class="btn btn-lg btn-success col-md-6"
+										name="save" value="Save" id="save">
+								</div>
+							</div>
 						</div>
 					</div>
 
@@ -517,8 +515,8 @@
 
 		<div class="col-sm-10">
 			<div class="panel panel-default">
-				<div class="showtable">
-					<table class="table">
+				<div >
+					<table class="table" id="showtable">
 						<tr>
 							<th>ACCOUNT HEAD</th>
 							<th>DEBIT</th>
@@ -527,7 +525,6 @@
 							<th>PROJECT NAME</th>
 							<th>MR.NO</th>
 							<th>DEPT NAME</th>
-							<th>CLIENT NAME</th>
 						</tr>
 
 					</table>
@@ -570,10 +567,10 @@
 
 				<div class="col-sm-5"></div>
 				<div class="col-sm-1">
-					<input type="submit" name="clear" value="CLEAR" id="clear">
+					<input type="submit" class="btn btn-danger" name="clear" value="CLEAR" id="clear">
 				</div>
 				<div class="col-sm-3">
-					<input type="submit" name="save" value="SAVE" id="save"
+					<input type="submit" name="savevoucher" value="SAVE VOUCHER" class="btn btn-success" id="savevoucher"
 						class="col-sm-10">
 				</div>
 				<div class="col-sm-3"></div>
