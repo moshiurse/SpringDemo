@@ -8,7 +8,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import edu.daffodil.ssb.dao.Country;
+import com.daffodil.ssb.model.Country;
+
 import edu.daffodil.ssb.services.CountryService;
 
 @Controller

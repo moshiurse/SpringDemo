@@ -1,4 +1,4 @@
-package edu.daffodil.ssb.dao;
+package com.daffodil.ssb.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

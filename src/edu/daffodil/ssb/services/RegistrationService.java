@@ -3,7 +3,8 @@ package edu.daffodil.ssb.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import edu.daffodil.ssb.dao.User;
+import com.daffodil.ssb.model.User;
+
 import edu.daffodil.ssb.dao.UserDao;
 
 @Service("registrationService")

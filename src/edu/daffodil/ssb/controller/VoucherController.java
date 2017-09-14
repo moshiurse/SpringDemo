@@ -9,8 +9,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import edu.daffodil.ssb.dao.ChartOfAccount;
-import edu.daffodil.ssb.dao.Voucher;
+import com.daffodil.ssb.model.ChartOfAccount;
+import com.daffodil.ssb.model.Voucher;
+
 import edu.daffodil.ssb.services.VoucherService;
 
 @Controller

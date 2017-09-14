@@ -7,7 +7,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import edu.daffodil.ssb.dao.User;
+import com.daffodil.ssb.model.User;
+
 import edu.daffodil.ssb.services.RegistrationService;
 
 @Controller

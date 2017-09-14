@@ -5,8 +5,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import edu.daffodil.ssb.dao.ChartOfAccount;
-import edu.daffodil.ssb.dao.Voucher;
+import com.daffodil.ssb.model.ChartOfAccount;
+import com.daffodil.ssb.model.Voucher;
+
 import edu.daffodil.ssb.dao.VoucherDao;
 
 @Service("voucherservice")
