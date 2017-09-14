@@ -2,17 +2,19 @@ package com.daffodil.ssb.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="acc_voucher_master")
 public class VoucherMaster {
 	
+	@Id
 	@Column(name ="vm_vno")
-	private int voucherNo;
+	private String voucherNo;
 	
 	@Column(name ="vm_vdate")
-	private int voucherDate;
+	private String voucherDate;
 	
 	@Column(name ="vm_fin_year")
 	private int finYear;
@@ -45,19 +47,19 @@ public class VoucherMaster {
 	private String createdBy;
 	
 
-	public int getVoucherNo() {
+	public String getVoucherNo() {
 		return voucherNo;
 	}
 
-	public void setVoucherNo(int voucherNo) {
+	public void setVoucherNo(String voucherNo) {
 		this.voucherNo = voucherNo;
 	}
 
-	public int getVoucherDate() {
+	public String getVoucherDate() {
 		return voucherDate;
 	}
 
-	public void setVoucherDate(int voucherDate) {
+	public void setVoucherDate(String voucherDate) {
 		this.voucherDate = voucherDate;
 	}
 
@@ -67,7 +69,7 @@ public class VoucherMaster {
 
 	public void setFinYear(int finYear) {
 		this.finYear = finYear;
-		finYear = 2017;
+		
 	}
 
 	public String getCurrent() {
@@ -76,7 +78,7 @@ public class VoucherMaster {
 
 	public void setCurrent(String current) {
 		this.current = current;
-		current = "TK";
+		
 	}
 
 	public String getNarration() {
@@ -93,6 +95,7 @@ public class VoucherMaster {
 
 	public void setActive(String active) {
 		this.active = active;
+		
 	}
 
 	public String getDescription() {
@@ -101,6 +104,7 @@ public class VoucherMaster {
 
 	public void setDescription(String description) {
 		this.description = description;
+		
 	}
 
 	public String getVerifiedBy() {
@@ -125,7 +129,7 @@ public class VoucherMaster {
 
 	public void setVoucherStatus(String voucherStatus) {
 		this.voucherStatus = voucherStatus;
-		voucherStatus = "P";
+		
 	}
 
 	public int getCompanyId() {
@@ -134,6 +138,7 @@ public class VoucherMaster {
 
 	public void setCompanyId(int companyId) {
 		this.companyId = companyId;
+		
 	}
 
 	public String getCreatedBy() {
@@ -142,7 +147,6 @@ public class VoucherMaster {
 
 	public void setCreatedBy(String createdBy) {
 		this.createdBy = createdBy;
-		createdBy = "Moshiur Rahman";
 	}
 
 	@Override
@@ -152,9 +156,5 @@ public class VoucherMaster {
 				+ description + ", verifiedBy=" + verifiedBy + ", verifiedDate=" + verifiedDate + ", voucherStatus="
 				+ voucherStatus + ", companyId=" + companyId + ", createdBy=" + createdBy + "]";
 	}
-
-
-
 	
-		
 }

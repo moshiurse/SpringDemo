@@ -18,7 +18,9 @@
 		
 		//----------------Start - Datepicker For Date Input-------------------
 		$(function(){
-			$("#date").datepicker();
+			$("#date").datepicker({
+				dateFormat: "yy-mm-dd"
+			});
 		});
 		
 		//--------------End of - Datepicker---------
@@ -158,17 +160,8 @@
 			 
 		// ------------------- Start- Save Button function----------------------------- 
 		 	$("#save").click(function(event){
-			 
-				var data = {};
-				data["voucherNo"] = $("#voucher").val();
-				data["voucherDate"] = $("#date").val();
-				data["narration"] = $("#narration").val();
-				data["voucherNo"] = $("#voucher").val();
-				data["voucherNo"] = $("#voucher").val();
-				data["voucherNo"] = $("#voucher").val();
-				data["voucherNo"] = $("#voucher").val();
-				data["voucherNo"] = $("#voucher").val();
-				var voucher = $.trim($("#voucher").val());
+
+				
 				var transaction = $.trim($("#transaction").val());
 				var voucherId = $.trim($("#voucherid").val());
 				var date = $.trim($("#date").val());
@@ -193,7 +186,32 @@
 		 })
 		 
 		 // ---------------- End of - Save Button function----------------------
-						 
+				
+		 // ------------------ Start - SaveVoucher Button---------------------
+		 $("#savevoucher").click(function(event){
+			 
+			 	var data = {};
+				data["voucherNo"] = $("#voucherid").val();
+				data["voucherDate"] = $("#date").val();
+				data["narration"] = $("#narration").val();
+				alert(JSON.stringify(data));
+				$.ajax({
+					type: "POST",
+					url: "saveVoucherMaster",
+					data: JSON.stringify(data),
+					contentType: "application/json; charset=utf-8",
+					success: function (successData) {
+						alert(JSON.stringify(data));
+					},
+					error: function(error){
+						alert(JSON.stringify(error));
+					}
+				});
+		 })
+		 
+		 
+		 // ------------------- End Of  SaveVoucher Button
+		 
 						 
 		// ------------------------Start- Finish Button -----------------
 		$("#finish").click(function(event) {

@@ -9,7 +9,7 @@
 		
 		function validator(){
 			
-			var name	= $.trim($("#name").val());
+			var name = $.trim($("#name").val());
 			var address = $.trim($("#address").val());
 			
 			if(name == ""){		
@@ -77,7 +77,7 @@
 		             }
 				}); 
 	
-			} // End of validation		
+			} // End of if validation		
 		}); // End of form submission
 		
 		

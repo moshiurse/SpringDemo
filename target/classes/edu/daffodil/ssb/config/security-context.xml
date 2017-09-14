@@ -50,6 +50,7 @@
 		<security:intercept-url pattern="/saveUser" access="permitAll" />
 		<security:intercept-url pattern="/voucher" access="permitAll" />
 		<security:intercept-url pattern="/saveVoucher" access="permitAll" />
+		<security:intercept-url pattern="/saveVoucherMaster" access="permitAll" />
 		<security:intercept-url pattern="/showControllHead" access="permitAll" />
 		<security:intercept-url pattern="/chartofaccount" access="permitAll" />
 		

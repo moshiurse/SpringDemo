@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.daffodil.ssb.model.ChartOfAccount;
 import com.daffodil.ssb.model.Voucher;
+import com.daffodil.ssb.model.VoucherMaster;
 
 @Repository
 @Transactional
@@ -45,9 +46,16 @@ public class VoucherDao {
 	public List<ChartOfAccount> showControllHead() {
 		System.out.println("inside dao");
 		List<ChartOfAccount> ca;
-		DetachedCriteria criteria = DetachedCriteria.forClass(ChartOfAccount.class); 	
+		DetachedCriteria criteria = DetachedCriteria.forClass(ChartOfAccount.class);
 		ca = criteria.getExecutableCriteria(session()).list();
 		System.out.println(ca.toString());
 		return ca;
+	}
+
+	public void saveVoucherMaster(VoucherMaster voucherMaster) {
+		
+		session().save(voucherMaster);
+		System.out.println("DAO "+voucherMaster.toString());
+		
 	}
 }

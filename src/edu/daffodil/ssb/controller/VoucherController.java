@@ -11,19 +11,19 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.daffodil.ssb.model.ChartOfAccount;
 import com.daffodil.ssb.model.Voucher;
+import com.daffodil.ssb.model.VoucherMaster;
 
 import edu.daffodil.ssb.services.VoucherService;
 
 @Controller
 public class VoucherController {
 	
+	
+	private VoucherService voucherService;
 	@Autowired
-	private VoucherService VoucherService;
-
 	public void setVoucherService(VoucherService voucherService) {
-		VoucherService = voucherService;
+		this.voucherService = voucherService;
 	}
-
 
 	@RequestMapping("/voucher")
 	public String showPaymentDepositVoucher() {
@@ -33,7 +33,7 @@ public class VoucherController {
 	
 	@RequestMapping(value ="/saveVoucher", method= RequestMethod.POST)
 	public @ResponseBody String saveVoucher(@RequestBody Voucher voucher) {
-		VoucherService.saveVoucher(voucher);
+		voucherService.saveVoucher(voucher);
 		
 		return "Voucher Saved Successfully!!!";
 	}
@@ -43,8 +43,21 @@ public class VoucherController {
 	@RequestMapping(value="/showControllHead",method=RequestMethod.POST)
 	public @ResponseBody List<ChartOfAccount> showControllHead(){	
 		System.out.println("request received");
-		return VoucherService.showControllHead();
+		return voucherService.showControllHead();
 			
+	}
+	
+	@RequestMapping(value="/saveVoucherMaster")
+	public @ResponseBody String saveVoucherMaster(@RequestBody VoucherMaster voucherMaster) {
+		/*voucherMaster.setFinYear(2017);
+		voucherMaster.setCurrent("TK");
+		voucherMaster.setVoucherStatus("P");
+		voucherMaster.setActive("A");
+		voucherMaster.setCompanyId(1);
+		voucherMaster.setCreatedBy("Moshiur");*/
+		voucherService.saveVoucherMaster(voucherMaster);
+		System.out.println("Controller "+voucherMaster.toString());
+		return "Voucher Master Saved Successfully!!";
 	}
 	
 
