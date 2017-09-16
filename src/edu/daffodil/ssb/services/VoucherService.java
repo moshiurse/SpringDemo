@@ -7,9 +7,9 @@ import org.springframework.stereotype.Service;
 
 import com.daffodil.ssb.model.ChartOfAccount;
 import com.daffodil.ssb.model.Voucher;
-import com.daffodil.ssb.model.VoucherMaster;
 
 import edu.daffodil.ssb.dao.VoucherDao;
+import edu.daffodil.ssb.dao.VoucherMaster;
 
 @Service("voucherservice")
 public class VoucherService {
@@ -24,13 +24,6 @@ public class VoucherService {
 	public void saveVoucher(Voucher voucher) {
 		voucherDao.saveVoucher(voucher);
 	}
-
-	/*
-	 * public List<ChartOfAccount> showControllHead(String caName){ return
-	 * voucherDao.showControllHead(caName);
-	 * 
-	 * }
-	 */
 	
 public List<ChartOfAccount> showControllHead() {
 		System.out.println("inside servic");

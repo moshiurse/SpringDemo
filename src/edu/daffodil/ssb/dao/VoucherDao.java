@@ -12,7 +12,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.daffodil.ssb.model.ChartOfAccount;
 import com.daffodil.ssb.model.Voucher;
-import com.daffodil.ssb.model.VoucherMaster;
 
 @Repository
 @Transactional

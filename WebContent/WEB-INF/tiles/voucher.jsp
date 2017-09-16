@@ -65,9 +65,9 @@
 					ca[key].caName+ ' </option>';
 				}
 				option += '</select>';
-				$("#controllheaddiv").html(option);
 				
-
+				$("#controllheaddiv").html(option);
+			
 			});
 		}
 					 

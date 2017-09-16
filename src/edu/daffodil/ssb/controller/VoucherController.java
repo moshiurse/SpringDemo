@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.daffodil.ssb.model.ChartOfAccount;
 import com.daffodil.ssb.model.Voucher;
-import com.daffodil.ssb.model.VoucherMaster;
 
+import edu.daffodil.ssb.dao.VoucherMaster;
 import edu.daffodil.ssb.services.VoucherService;
 
 @Controller
@@ -49,12 +49,13 @@ public class VoucherController {
 	
 	@RequestMapping(value="/saveVoucherMaster")
 	public @ResponseBody String saveVoucherMaster(@RequestBody VoucherMaster voucherMaster) {
-		/*voucherMaster.setFinYear(2017);
+		voucherMaster.setFinYear(1);
 		voucherMaster.setCurrent("TK");
 		voucherMaster.setVoucherStatus("P");
 		voucherMaster.setActive("A");
 		voucherMaster.setCompanyId(1);
-		voucherMaster.setCreatedBy("Moshiur");*/
+		voucherMaster.setCreatedBy("Moshiur");
+		//voucherMaster.setCreatedAt("");
 		voucherService.saveVoucherMaster(voucherMaster);
 		System.out.println("Controller "+voucherMaster.toString());
 		return "Voucher Master Saved Successfully!!";

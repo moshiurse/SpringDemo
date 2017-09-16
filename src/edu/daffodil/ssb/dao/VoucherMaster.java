@@ -1,4 +1,4 @@
-package com.daffodil.ssb.model;
+package edu.daffodil.ssb.dao;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -45,6 +45,9 @@ public class VoucherMaster {
 	
 	@Column(name ="vm_created_by")
 	private String createdBy;
+	
+	//@Column(name ="created_at")
+	//private String createdAt;
 	
 
 	public String getVoucherNo() {
@@ -148,6 +151,16 @@ public class VoucherMaster {
 	public void setCreatedBy(String createdBy) {
 		this.createdBy = createdBy;
 	}
+	
+	
+
+	/*public String getCreatedAt() {
+		return createdAt;
+	}
+
+	public void setCreatedAt(String createdAt) {
+		this.createdAt = createdAt;
+	}*/
 
 	@Override
 	public String toString() {
