@@ -201,12 +201,14 @@
 					data: JSON.stringify(data),
 					contentType: "application/json; charset=utf-8",
 					success: function (successData) {
-						alert(JSON.stringify(data));
+						alert("Successfully Inserted Voucher Master");
 					},
 					error: function(error){
 						alert(JSON.stringify(error));
 					}
 				});
+				
+				
 		 })
 		 
 		 

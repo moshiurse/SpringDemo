@@ -1,13 +1,32 @@
 package edu.daffodil.ssb.dao;
 
+import java.io.Serializable;
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 
 @Entity
 @Table(name="acc_voucher_master")
-public class VoucherMaster {
+public class VoucherMaster implements Serializable{
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	
+	@JoinColumn(name = "vm_vno",nullable=true)
+	@ManyToOne
+	private VoucherDetail voucherDetail;
 	
 	@Id
 	@Column(name ="vm_vno")
@@ -46,9 +65,10 @@ public class VoucherMaster {
 	@Column(name ="vm_created_by")
 	private String createdBy;
 	
-	//@Column(name ="created_at")
-	//private String createdAt;
-	
+
+	public void setVoucherDetail(VoucherDetail voucherDetail) {
+		this.voucherDetail = voucherDetail;
+	}
 
 	public String getVoucherNo() {
 		return voucherNo;
@@ -152,15 +172,26 @@ public class VoucherMaster {
 		this.createdBy = createdBy;
 	}
 	
-	
 
-	/*public String getCreatedAt() {
-		return createdAt;
+	@OneToMany(mappedBy = "vdVoucherNo", fetch = FetchType.EAGER)
+	private List<VoucherDetail> voucherDetails;
+	
+	
+	public List<VoucherDetail> getVoucherDetails() {
+		return voucherDetails;
 	}
 
-	public void setCreatedAt(String createdAt) {
-		this.createdAt = createdAt;
-	}*/
+	public void setVoucherDetails(List<VoucherDetail> voucherDetails) {
+		this.voucherDetails = voucherDetails;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
+	public VoucherDetail getVoucherDetail() {
+		return voucherDetail;
+	}
 
 	@Override
 	public String toString() {

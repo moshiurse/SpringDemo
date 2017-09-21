@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.daffodil.ssb.model.ChartOfAccount;
 import com.daffodil.ssb.model.Voucher;
 
+import edu.daffodil.ssb.dao.VoucherDetail;
 import edu.daffodil.ssb.dao.VoucherMaster;
 import edu.daffodil.ssb.services.VoucherService;
 
@@ -32,8 +33,25 @@ public class VoucherController {
 	}
 	
 	@RequestMapping(value ="/saveVoucher", method= RequestMethod.POST)
-	public @ResponseBody String saveVoucher(@RequestBody Voucher voucher) {
-		voucherService.saveVoucher(voucher);
+	public @ResponseBody String saveVoucher(@RequestBody VoucherMaster voucherMaster) {
+		voucherMaster.setFinYear(1);
+		voucherMaster.setCurrent("TK");
+		voucherMaster.setVoucherStatus("P");
+		voucherMaster.setActive("A");
+		voucherMaster.setCompanyId(1);
+		voucherMaster.setCreatedBy("Moshiur");	
+		voucherService.saveVoucherMaster(voucherMaster);
+		
+		for(VoucherDetail voucherDetail: voucherMaster.getVoucherDetails()) {
+			voucherDetail.setVdVoucherNo(voucherMaster);
+			if(voucherDetail.getCredit()== 0) {
+				voucherDetail.setCredit(0);
+			}else if (voucherDetail.getDebit()== 0) {
+				voucherDetail.setDebit(0);
+			}
+			
+			voucherService.saveVoucherDetail(voucherDetail);
+		}
 		
 		return "Voucher Saved Successfully!!!";
 	}
@@ -47,19 +65,24 @@ public class VoucherController {
 			
 	}
 	
-	@RequestMapping(value="/saveVoucherMaster")
+	/*@RequestMapping(value="/saveVoucherMaster")
 	public @ResponseBody String saveVoucherMaster(@RequestBody VoucherMaster voucherMaster) {
-		voucherMaster.setFinYear(1);
-		voucherMaster.setCurrent("TK");
-		voucherMaster.setVoucherStatus("P");
-		voucherMaster.setActive("A");
-		voucherMaster.setCompanyId(1);
-		voucherMaster.setCreatedBy("Moshiur");
+		
 		//voucherMaster.setCreatedAt("");
 		voucherService.saveVoucherMaster(voucherMaster);
 		System.out.println("Controller "+voucherMaster.toString());
 		return "Voucher Master Saved Successfully!!";
 	}
+	
+	@RequestMapping(value="/saveVoucherDetail")
+	public @ResponseBody String saveVoucherDetail(@RequestBody VoucherDetail voucherDetail) {
+		VoucherMaster voucherMaster = new VoucherMaster();
+		String id = voucherMaster.getVoucherNo();
+		voucherDetail.setVoucherNo(id);
+		voucherService.saveVoucherDetail(voucherDetail);
+		System.out.println("Controller "+voucherDetail.toString());
+		return "Voucher Detail Saved Successfully!!";
+	}*/
 	
 
 }

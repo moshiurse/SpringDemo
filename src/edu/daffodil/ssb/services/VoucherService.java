@@ -9,6 +9,7 @@ import com.daffodil.ssb.model.ChartOfAccount;
 import com.daffodil.ssb.model.Voucher;
 
 import edu.daffodil.ssb.dao.VoucherDao;
+import edu.daffodil.ssb.dao.VoucherDetail;
 import edu.daffodil.ssb.dao.VoucherMaster;
 
 @Service("voucherservice")
@@ -21,9 +22,9 @@ public class VoucherService {
 		this.voucherDao = voucherDao;
 	}
 
-	public void saveVoucher(Voucher voucher) {
+	/*public void saveVoucher(Voucher voucher) {
 		voucherDao.saveVoucher(voucher);
-	}
+	}*/
 	
 public List<ChartOfAccount> showControllHead() {
 		System.out.println("inside servic");
@@ -33,6 +34,12 @@ public List<ChartOfAccount> showControllHead() {
 public void saveVoucherMaster(VoucherMaster voucherMaster) {
 	voucherDao.saveVoucherMaster(voucherMaster);
 	System.out.println("Services "+voucherMaster.toString());
+	
+}
+
+public void saveVoucherDetail(VoucherDetail voucherDetail) {
+	voucherDao.saveVoucherDetail(voucherDetail);
+	System.out.println("Services "+voucherDetail.toString());
 	
 }
 	

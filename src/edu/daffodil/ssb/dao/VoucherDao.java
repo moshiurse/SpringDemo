@@ -26,20 +26,10 @@ public class VoucherDao {
 		return sessionFactory.getCurrentSession();
 	}
 	
-	public void saveVoucher(Voucher voucher) {
+	/*public void saveVoucher(Voucher voucher) {
 		session().save(voucher);
-	}
-	
-/*
-	@SuppressWarnings("unchecked")
-	public List<ChartOfAccount> showControllHead(String caName) {
-		
-		String caQuery = "select ca_name from acc_ca where ca_name like '%caName%'";
-		Query query = sessionFactory.getCurrentSession().createQuery(caQuery);
-		// query.setString("company_name", caName + "%");
-		return query.list();
 	}*/
-
+	
 	
 	@SuppressWarnings("unchecked")
 	public List<ChartOfAccount> showControllHead() {
@@ -57,4 +47,12 @@ public class VoucherDao {
 		System.out.println("DAO "+voucherMaster.toString());
 		
 	}
+
+	public void saveVoucherDetail(VoucherDetail voucherDetail) {
+		session().save(voucherDetail);
+		System.out.println("DAO "+voucherDetail.toString());
+		
+	}
+	
+	
 }
