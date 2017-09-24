@@ -6,17 +6,20 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Payment Deposit Voucher</title>
-<script type="text/javascript">
-// ------------------- Start document.ready()---------------------------
-	$(document).ready(function() {
-			
-		// ------------------Start Calling all functions--------------------------
-			showControllHead();
-			radioCheck();
-			firstcheck();
-		// ------------------- End of Calling all methods ------------------------	
-		
-		//----------------Start - Datepicker For Date Input-------------------
+
+
+<script>
+
+$(document).ready(function(){
+	
+	// ------------------Start Calling all functions--------------------------
+	showControllHead();
+	radioCheck();
+	firstcheck();
+// ------------------- End of Calling all methods ------------------------	
+
+
+//----------------Start - Datepicker For Date Input-------------------
 		$(function(){
 			$("#date").datepicker({
 				dateFormat: "yy-mm-dd"
@@ -24,7 +27,8 @@
 		});
 		
 		//--------------End of - Datepicker---------
-			
+		
+
 		// First Checked value functionality...
 		function firstcheck(){
 			
@@ -54,7 +58,7 @@
 		
 		}
 		//Finished First Checked value functionality...
-
+		
 		//--------------------Start - Data Load to combo box----------------------
 		function showControllHead() {
 			$.post("showControllHead",function(ca) {
@@ -72,8 +76,8 @@
 		}
 					 
 	 //---------------------- End of Data Load to combo box Task Complete-------------------
-		 
-	 //----------------Start- Disable some input after Click RadioButton-------------------
+	
+	  //----------------Start- Disable some input after Click RadioButton-------------------
 		 		function radioCheck() {
 					$('input[name="voucher"]') 
 					.change(function(){ 
@@ -116,49 +120,8 @@
 	 } 
 					 
 	// ---------------End of - Disable some input after Click RadioButton--------------------
-
-			/*	
-				$(".voucher").on( "click", function(event) {
-					var target = $( event.target );
-			        if (target.is(":checked")) {
-			            check = target.val();
-			            alert(check);
-			            if (check == 1) {
-
-			                $("#credit").prop("disabled", true);
-			                $("#debit").prop("disabled", false);
-			            } else if (check == 2) {
-
-			                $("#debit").prop("disabled", true);
-			                $("#credit").prop("disabled", false);
-			            }
-			        }
-			    });
-				
-				 $(".transaction").click(function(event) {
-				     var target = $( event.target );
-				        if (target.is(":checked")) {
-				            checktransaction = target.val();
-				            alert(checktransaction);
-				            if (checktransaction == 1) {
-
-				                $("#bankacc").prop("disabled", true);
-				                $("#chequeno").prop("disabled", true);
-				                $("#cashinhand").prop("disabled", false);
-				            }
-
-				            if (checktransaction == 2) {
-
-				                $("#cashinhand").prop("disabled", true);
-				                $("#bankacc").prop("disabled", false);
-				                $("#chequeno").prop("disabled", false);
-				            }
-				        }
-				    });
-			 */
-			 
-			 
-		// ------------------- Start- Save Button function----------------------------- 
+	
+	// ------------------- Start- Save Button function----------------------------- 
 		 	$("#save").click(function(event){
 
 				
@@ -186,22 +149,52 @@
 		 })
 		 
 		 // ---------------- End of - Save Button function----------------------
-				
+		 
 		 // ------------------ Start - SaveVoucher Button---------------------
 		 $("#savevoucher").click(function(event){
-			 
+			 	event.preventDefault();
+			 	
+			 	var i = 1;
 			 	var data = {};
+			 	var voucherDetail = [];
+			 	
+			 	$("#tableVoucher tr").each(function(){
+			 		
+			 		var tableData = $(this).children("td").map(function(){
+			 			
+			 		return $(this).html();
+			 	}).get();
+			 	
+			 	if(i >1){
+			 		var element = {vdVoucherNo:[], voucherDate:[], voucherAmount:[], voucherStatus:[]};
+			 		//details table
+			 		// not clear.....
+			 		// serial no ?
+			 		element["vdVoucherNo"] = tableData[0]; //joincolumn ?
+			 		element["debit"] = tableData[1];
+			 		element["credit"] = tableData[2];
+			 		element["chequeNo"] = tableData[3];
+			 		voucherDetail.push(element);
+			 		
+			 	}
+			 	i++;
+			 	
+			 	});
+			 	// master ?? 
+			 	// all column?
 				data["voucherNo"] = $("#voucherid").val();
 				data["voucherDate"] = $("#date").val();
+				data["controllHead"] = $("#controllhead").val();
 				data["narration"] = $("#narration").val();
+								
 				alert(JSON.stringify(data));
 				$.ajax({
 					type: "POST",
-					url: "saveVoucherMaster",
+					url: "saveVoucher",
 					data: JSON.stringify(data),
 					contentType: "application/json; charset=utf-8",
 					success: function (successData) {
-						alert("Successfully Inserted Voucher Master");
+						alert("Successfully Inserted Voucher");
 					},
 					error: function(error){
 						alert(JSON.stringify(error));
@@ -214,8 +207,7 @@
 		 
 		 // ------------------- End Of  SaveVoucher Button
 		 
-						 
-		// ------------------------Start- Finish Button -----------------
+		 // ------------------------Start- Finish Button -----------------
 		$("#finish").click(function(event) {
 			event.preventDefault();
 
@@ -359,10 +351,8 @@
 
 							return true;
 						}
-		 //--------------------End of Validation function--------------------------
+});
 
-					});
-		// ----------------- End of Document.ready()-----------------------------
 </script>
 
 </head>
@@ -421,10 +411,10 @@
 								<div class="col-sm-2"></div>
 							</div>
 							<div class="form-group">
-								<div class="col-sm-2" style="padding-top: 5px">
+								<div class="col-sm-2" style="padding-bottom: 5px">
 									<label>Date :</label>
 								</div>
-								<div class="col-sm-3" style="padding-top: 5px">
+								<div class="col-sm-3" style="padding-bottom: 5px">
 									<input type="text" class="form-control" name="date" id="date">
 								</div>
 							</div>

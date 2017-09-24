@@ -8,7 +8,7 @@ import com.daffodil.ssb.model.User;
 import edu.daffodil.ssb.dao.UserDao;
 
 @Service("registrationService")
-public class RegistrationService {
+public class UserService {
 	
 	
 	private UserDao userDao;

@@ -13,7 +13,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="acc_voucher_master")
+@Table(name="acc_voucher_detail")
 public class VoucherDetail implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
@@ -22,7 +22,6 @@ public class VoucherDetail implements Serializable {
 	@ManyToOne
 	private VoucherMaster vdVoucherNo;
 	
-		
 	@Column(name ="vd_sl_no")
 	private int serialNo;
 	
@@ -80,9 +79,6 @@ public class VoucherDetail implements Serializable {
 		return serialNo;
 	}
 	
-	
-	
-
 	public VoucherMaster getVdVoucherNo() {
 		return vdVoucherNo;
 	}
@@ -216,10 +212,5 @@ public class VoucherDetail implements Serializable {
 				+ invoiceNo + ", mrNo=" + mrNo + ", description=" + description + ", bankId=" + bankId + ", bandleNo="
 				+ bandleNo + "]";
 	}
-	
-	
-	
-	
-	
 
 }

@@ -143,7 +143,8 @@ $(document).ready(function(){
 
 
 
-	<form class="form-horizontal">
+	<form class="form-horizontal" id="regform" name="regform" method="post" 
+		action="${pageContext.request.contextPath}/registration/save">
 		<fieldset>
 
 			<!-- Form Name -->
@@ -159,8 +160,7 @@ $(document).ready(function(){
 				<label class="col-md-4 control-label" for="regname">Name</label>
 				<div class="col-md-4">
 					<input id="regname" name="regname" type="text" 
-					placeholder="Enter Your Name" class="form-control input-md"
-						required="">
+					placeholder="Enter Your Name" class="form-control input-md">
 
 				</div>
 			</div>
@@ -170,8 +170,7 @@ $(document).ready(function(){
 				<label class="col-md-4 control-label" for="regusername">Username</label>
 				<div class="col-md-4">
 					<input id="regusername" name="regusername" type="text"
-						placeholder="Enter your username" class="form-control input-md"
-						required="">
+						placeholder="Enter your username" class="form-control input-md">
 
 				</div>
 			</div>
@@ -181,7 +180,7 @@ $(document).ready(function(){
 				<label class="col-md-4 control-label" for="regpass">Password</label>
 				<div class="col-md-4">
 					<input id="regpass" name="regpass" type="text"
-						placeholder="Enter pass" class="form-control input-md" required="">
+						placeholder="Enter pass" class="form-control input-md">
 
 				</div>
 			</div>
@@ -199,11 +198,49 @@ $(document).ready(function(){
 
 				</div>
 			</div>
+			
+			<!-- Text input-->
+			<div class="form-group">
+				<label class="col-md-4 control-label" for="country">Country</label>
+				<div class="col-md-4">
+					<select id="country" name="country" class="form-control input-md">
+					<option>Select</option>
+					<c:forEach var="i" items="${countryList}">
+					<option value="${i.countryId}"><c:out value="${i.countryName}"/></option>
+					</c:forEach>
+					</select>
+				</div>
+			</div>
+
+
+
+			<!-- Text input-->
+			
+			<!-- Text input-->
+			<div class="form-group">
+				<label class="col-md-4 control-label" for="role">Role</label>
+				<div class="col-md-4">
+					<select id="role" name="role" class="form-control input-md">
+					<option>Select</option>
+					<option value="1">ROLE_ADMIN</option>
+					<option value="2">ROLE_USER</option>
+					<option value="3">ROLE_MANAGER</option>
+					</select>
+
+				</div>
+			</div>
+
+
+
+			<!-- Text input-->
 
 			<!-- Button (Double) -->
 			<div class="form-group">
 				<label class="col-md-4 control-label" for="regbtn"></label>
 				<div class="col-md-8">
+				
+				<input type="hidden" id="tempId" name="tempId">
+				
 					<button id="regbtn" name="regbtn" class="btn btn-success">Register</button>
 					<button id="clearbtn" name="clearbtn" class="btn btn-danger">Clear</button>
 				</div>

@@ -9,13 +9,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.daffodil.ssb.model.User;
 
-import edu.daffodil.ssb.services.RegistrationService;
+import edu.daffodil.ssb.services.UserService;
 
 @Controller
 public class RegistrationController {
 	
 	@Autowired
-	private RegistrationService registrationService;
+	private UserService registrationService;
 	
 	@RequestMapping(value="/registration")
 	public String showRegistration() {
@@ -23,7 +23,7 @@ public class RegistrationController {
 	}
 	
 	
-	public void setRegistrationService(RegistrationService registrationService) {
+	public void setRegistrationService(UserService registrationService) {
 		this.registrationService = registrationService;
 	}
 

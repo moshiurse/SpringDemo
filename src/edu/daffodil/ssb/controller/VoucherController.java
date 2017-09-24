@@ -17,8 +17,7 @@ import edu.daffodil.ssb.dao.VoucherMaster;
 import edu.daffodil.ssb.services.VoucherService;
 
 @Controller
-public class VoucherController {
-	
+public class VoucherController{
 	
 	private VoucherService voucherService;
 	@Autowired
@@ -39,17 +38,21 @@ public class VoucherController {
 		voucherMaster.setVoucherStatus("P");
 		voucherMaster.setActive("A");
 		voucherMaster.setCompanyId(1);
-		voucherMaster.setCreatedBy("Moshiur");	
+		voucherMaster.setCreatedBy("Moshiur");
+		
 		voucherService.saveVoucherMaster(voucherMaster);
 		
 		for(VoucherDetail voucherDetail: voucherMaster.getVoucherDetails()) {
+
 			voucherDetail.setVdVoucherNo(voucherMaster);
-			if(voucherDetail.getCredit()== 0) {
+			voucherDetail.setProjectCode(null);
+			voucherDetail.setChartOfAccId(null);
+			voucherDetail.setDepartmentId(null);
+			if(voucherDetail.getCredit()== 0){
 				voucherDetail.setCredit(0);
 			}else if (voucherDetail.getDebit()== 0) {
 				voucherDetail.setDebit(0);
-			}
-			
+			}	
 			voucherService.saveVoucherDetail(voucherDetail);
 		}
 		
@@ -65,24 +68,6 @@ public class VoucherController {
 			
 	}
 	
-	/*@RequestMapping(value="/saveVoucherMaster")
-	public @ResponseBody String saveVoucherMaster(@RequestBody VoucherMaster voucherMaster) {
-		
-		//voucherMaster.setCreatedAt("");
-		voucherService.saveVoucherMaster(voucherMaster);
-		System.out.println("Controller "+voucherMaster.toString());
-		return "Voucher Master Saved Successfully!!";
-	}
-	
-	@RequestMapping(value="/saveVoucherDetail")
-	public @ResponseBody String saveVoucherDetail(@RequestBody VoucherDetail voucherDetail) {
-		VoucherMaster voucherMaster = new VoucherMaster();
-		String id = voucherMaster.getVoucherNo();
-		voucherDetail.setVoucherNo(id);
-		voucherService.saveVoucherDetail(voucherDetail);
-		System.out.println("Controller "+voucherDetail.toString());
-		return "Voucher Detail Saved Successfully!!";
-	}*/
 	
 
 }

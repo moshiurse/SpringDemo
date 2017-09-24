@@ -18,16 +18,8 @@ import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 @Table(name="acc_voucher_master")
 public class VoucherMaster implements Serializable{
 	
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
-	
-	@JoinColumn(name = "vm_vno",nullable=true)
-	@ManyToOne
-	private VoucherDetail voucherDetail;
-	
 	@Id
 	@Column(name ="vm_vno")
 	private String voucherNo;
@@ -65,11 +57,6 @@ public class VoucherMaster implements Serializable{
 	@Column(name ="vm_created_by")
 	private String createdBy;
 	
-
-	public void setVoucherDetail(VoucherDetail voucherDetail) {
-		this.voucherDetail = voucherDetail;
-	}
-
 	public String getVoucherNo() {
 		return voucherNo;
 	}
@@ -172,7 +159,6 @@ public class VoucherMaster implements Serializable{
 		this.createdBy = createdBy;
 	}
 	
-
 	@OneToMany(mappedBy = "vdVoucherNo", fetch = FetchType.EAGER)
 	private List<VoucherDetail> voucherDetails;
 	
@@ -189,9 +175,7 @@ public class VoucherMaster implements Serializable{
 		return serialVersionUID;
 	}
 
-	public VoucherDetail getVoucherDetail() {
-		return voucherDetail;
-	}
+
 
 	@Override
 	public String toString() {

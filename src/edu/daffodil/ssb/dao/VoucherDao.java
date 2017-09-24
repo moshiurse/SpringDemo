@@ -26,10 +26,6 @@ public class VoucherDao {
 		return sessionFactory.getCurrentSession();
 	}
 	
-	/*public void saveVoucher(Voucher voucher) {
-		session().save(voucher);
-	}*/
-	
 	
 	@SuppressWarnings("unchecked")
 	public List<ChartOfAccount> showControllHead() {

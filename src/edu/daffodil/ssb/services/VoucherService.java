@@ -14,20 +14,15 @@ import edu.daffodil.ssb.dao.VoucherMaster;
 
 @Service("voucherservice")
 public class VoucherService {
-	@Autowired
+	
 	private VoucherDao voucherDao;
-
 	@Autowired
 	public void setVoucherDao(VoucherDao voucherDao) {
 		this.voucherDao = voucherDao;
 	}
-
-	/*public void saveVoucher(Voucher voucher) {
-		voucherDao.saveVoucher(voucher);
-	}*/
 	
 public List<ChartOfAccount> showControllHead() {
-		System.out.println("inside servic");
+		System.out.println("inside service");
 		return voucherDao.showControllHead();
 	}
 
