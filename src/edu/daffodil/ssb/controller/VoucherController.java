@@ -42,7 +42,7 @@ public class VoucherController{
 		
 		voucherService.saveVoucherMaster(voucherMaster);
 		
-		for(VoucherDetail voucherDetail: voucherMaster.getVoucherDetails()) {
+		for(VoucherDetail voucherDetail: voucherMaster.getVoucherDetails()){
 
 			voucherDetail.setVdVoucherNo(voucherMaster);
 			voucherDetail.setProjectCode(null);

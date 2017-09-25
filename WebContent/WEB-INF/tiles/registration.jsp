@@ -193,8 +193,7 @@ $(document).ready(function(){
 					Password</label>
 				<div class="col-md-4">
 					<input id="regconpass" name="regconpass" type="text"
-						placeholder="Confirm your Password" class="form-control input-md"
-						required="">
+						placeholder="Confirm your Password" class="form-control input-md">
 
 				</div>
 			</div>

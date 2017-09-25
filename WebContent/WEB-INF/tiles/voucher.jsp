@@ -122,58 +122,70 @@ $(document).ready(function(){
 	// ---------------End of - Disable some input after Click RadioButton--------------------
 	
 	// ------------------- Start- Save Button function----------------------------- 
-		 	$("#save").click(function(event){
-
-				
-				var transaction = $.trim($("#transaction").val());
-				var voucherId = $.trim($("#voucherid").val());
-				var date = $.trim($("#date").val());
-				var project = $.trim($("#project").val());
-				var department = $.trim($("#department").val());
-				var cashInHand = $.trim($("#cashinhand").val());
-				var bankAcc = $.trim($("#bankacc").val());
-				var chequeNo = $.trim($("#chequeno").val());
-				var mrNo = $.trim($("#mrno").val());
-				var controllHead = $.trim($("#controllhead").val());
-				var debit = $.trim($("#debit").val());
-				var credit = $.trim($("#credit").val());
-				
-				var dataTable = '<tr><td>'+controllHead+'</td><td>'+debit+'</td><td>'+credit
-				+'</td><td>'+chequeNo+'</td><td>'+project
-				+'</td><td>'+mrNo+'</td><td>'+department
-				+'</td></tr>';
-				dataTable += '</table>';
-				
-				$("#showtable").append(dataTable);
+ 		 		 $("#save").click(function(event){
+ 		 			
+	 		 		var rows;
+	 		 		var row = {};
+ 		 		
+					var element = {chartOfAccId:[], debit:[], credit:[],
+ 				 	chequeNo:[], projectCode:[], mrNo:[], departmentId:[]};
+ 		 			
+ 		 			element["chartOfAccId"] = $("#controllhead").val();
+			 		element["debit"] = $("#debit").val();
+			 		element["credit"] = $("#credit").val();
+			 		element["chequeNo"] = $("#chequeno").val();
+			 		element["projectCode"] = $("#project").val();
+			 		element["mrNo"] = $("#mrno").val();
+			 		element["departmentId"] = $("#department").val();
+			 		
+			 		row.push(element);
+			 		alert(JSON.stringify(row));
+ 		 							
+					var dataTable = '<tr><td>'+element["chartOfAccId"]+'</td><td>'
+					+element["debit"]+'</td><td>'+element["credit"]
+					+'</td><td>'+element["chequeNo"]+'</td><td>'+element["projectCode"]
+					+'</td><td>'+element["mrNo"]+'</td><td>'+element["departmentId"]
+					+'</td></tr>'; 
+					
+					$("#showtable").append(dataTable);
 
 		 })
 		 
 		 // ---------------- End of - Save Button function----------------------
 		 
+		 // ---------------- Start - Create Table data----------------------
+		 
+		 	function createTable(){
+				
+			}
+		 // ---------------- End of - Create Table data----------------------
+		 
 		 // ------------------ Start - SaveVoucher Button---------------------
-		 $("#savevoucher").click(function(event){
+		 	 $("#saveVoucher").click(function(event){
 			 	event.preventDefault();
 			 	
 			 	var i = 1;
-			 	var data = {};
+			 	// var data = {};
 			 	var voucherDetail = [];
 			 	
-			 	$("#tableVoucher tr").each(function(){
+			 	 $("#showtable tr").each(function(){
 			 		
 			 		var tableData = $(this).children("td").map(function(){
 			 			
 			 		return $(this).html();
-			 	}).get();
+			 	}).get(); 
 			 	
 			 	if(i >1){
-			 		var element = {vdVoucherNo:[], voucherDate:[], voucherAmount:[], voucherStatus:[]};
-			 		//details table
-			 		// not clear.....
-			 		// serial no ?
-			 		element["vdVoucherNo"] = tableData[0]; //joincolumn ?
+			 		var element = {chartOfAccId:[], debit:[], credit:[], 
+			 			chequeNo:[], projectCode:[], mrNo:[], departmentId:[]};
+			 		
+			 		element["chartOfAccId"] = tableData[0];
 			 		element["debit"] = tableData[1];
 			 		element["credit"] = tableData[2];
 			 		element["chequeNo"] = tableData[3];
+			 		element["projectCode"] = tableData[4];
+			 		element["mrNo"] = tableData[5];
+			 		element["departmentId"] = tableData[6];
 			 		voucherDetail.push(element);
 			 		
 			 	}
@@ -182,12 +194,12 @@ $(document).ready(function(){
 			 	});
 			 	// master ?? 
 			 	// all column?
-				data["voucherNo"] = $("#voucherid").val();
+				/* data["voucherNo"] = $("#voucherid").val();
 				data["voucherDate"] = $("#date").val();
 				data["controllHead"] = $("#controllhead").val();
 				data["narration"] = $("#narration").val();
 								
-				alert(JSON.stringify(data));
+				 alert(JSON.stringify(data));
 				$.ajax({
 					type: "POST",
 					url: "saveVoucher",
@@ -200,13 +212,14 @@ $(document).ready(function(){
 						alert(JSON.stringify(error));
 					}
 				});
-				
+				 */
 				
 		 })
-		 
+		  
 		 
 		 // ------------------- End Of  SaveVoucher Button
 		 
+
 		 // ------------------------Start- Finish Button -----------------
 		$("#finish").click(function(event) {
 			event.preventDefault();
