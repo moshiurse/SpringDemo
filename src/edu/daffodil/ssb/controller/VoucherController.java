@@ -9,9 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.daffodil.ssb.model.ChartOfAccount;
-import com.daffodil.ssb.model.Voucher;
-
+import edu.daffodil.ssb.dao.ChartOfAccount;
+import edu.daffodil.ssb.dao.Voucher;
 import edu.daffodil.ssb.dao.VoucherDetail;
 import edu.daffodil.ssb.dao.VoucherMaster;
 import edu.daffodil.ssb.services.VoucherService;
@@ -40,11 +39,13 @@ public class VoucherController{
 		voucherMaster.setCompanyId(1);
 		voucherMaster.setCreatedBy("Moshiur");
 		
+		System.out.println("Controller"+voucherMaster.toString());
 		voucherService.saveVoucherMaster(voucherMaster);
 		
 		for(VoucherDetail voucherDetail: voucherMaster.getVoucherDetails()){
 
 			voucherDetail.setVdVoucherNo(voucherMaster);
+			System.out.println(voucherMaster.toString());
 			voucherDetail.setProjectCode(null);
 			voucherDetail.setChartOfAccId(null);
 			voucherDetail.setDepartmentId(null);
@@ -54,10 +55,12 @@ public class VoucherController{
 				voucherDetail.setDebit(0);
 			}	
 			voucherService.saveVoucherDetail(voucherDetail);
+			System.out.println("Controller"+voucherDetail.toString());
 		}
 		
 		return "Voucher Saved Successfully!!!";
 	}
+
 	
 	
 	

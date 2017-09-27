@@ -7,8 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.daffodil.ssb.model.StudentMarks;
-
+import edu.daffodil.ssb.dao.StudentMarks;
 import edu.daffodil.ssb.services.ResultServices;
 
 @Controller

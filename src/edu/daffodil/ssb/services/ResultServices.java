@@ -3,9 +3,8 @@ package edu.daffodil.ssb.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.daffodil.ssb.model.StudentMarks;
-
 import edu.daffodil.ssb.dao.ResultDao;
+import edu.daffodil.ssb.dao.StudentMarks;
 
 @Service("resultService")
 public class ResultServices {

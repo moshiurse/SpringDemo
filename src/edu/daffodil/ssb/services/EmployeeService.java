@@ -5,8 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.daffodil.ssb.model.Employee;
-
+import edu.daffodil.ssb.dao.Employee;
 import edu.daffodil.ssb.dao.EmployeeDao;
 
 @Service("employeeService")

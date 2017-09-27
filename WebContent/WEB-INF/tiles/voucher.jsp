@@ -61,19 +61,24 @@ $(document).ready(function(){
 		
 		//--------------------Start - Data Load to combo box----------------------
 		function showControllHead() {
-			$.post("showControllHead",function(ca) {
-								
+
+			
+			$.post("showControllHead", function(ca){
+				
 				var option = '<select class="form-control" id="controllhead" name="controllhead"><option value="0">Select</option>';
-				for (var key in ca) {
-					option += '<option value="'+ca[key].caName+'"> '+
-					ca[key].caName+ ' </option>';
+				
+				for(var key in ca){
+					option += '<option value="'+ca[key].caName+'"> '+ca[key].caName+'</option>'
 				}
+				
 				option += '</select>';
 				
 				$("#controllheaddiv").html(option);
 			
 			});
 		}
+		
+		
 					 
 	 //---------------------- End of Data Load to combo box Task Complete-------------------
 	
@@ -88,18 +93,18 @@ $(document).ready(function(){
 							
 					        $("#credit").prop("disabled", true);
 					        $("#debit").prop("disabled", false);
+					        $("#credit").val("");
 					    } else if (val == 2) {
 							
 					        $("#debit").prop("disabled", true);
 					        $("#credit").prop("disabled", false);
+					        $("#debit").val("");
 					    }
 					    }
 					});
 
 
-					 $('input[name="transaction"]') 
-					.change(function()
-							{ 
+					 $('input[name="transaction"]').change(function(){ 
 					    if( $(this).is(":checked") ){ 
 					        var val = $(this).val(); 
 					      if (val == 1) {
@@ -107,6 +112,9 @@ $(document).ready(function(){
 					            $("#bankacc").prop("disabled", true);
 					            $("#chequeno").prop("disabled", true);
 					            $("#cashinhand").prop("disabled", false);
+					            
+					            $("#bankacc").val("");
+					            $("#chequeno").val("");
 					        }
 
 					        if (val == 2) {
@@ -114,6 +122,8 @@ $(document).ready(function(){
 					            $("#cashinhand").prop("disabled", true);
 					            $("#bankacc").prop("disabled", false);
 					            $("#chequeno").prop("disabled", false);
+					            
+					            $("#cashinhand").val("");
 					        }
 					    }
 					});
@@ -121,47 +131,51 @@ $(document).ready(function(){
 					 
 	// ---------------End of - Disable some input after Click RadioButton--------------------
 	
+	$("#add").click(function(event){
+		})
 	// ------------------- Start- Save Button function----------------------------- 
- 		 		 $("#save").click(function(event){
- 		 			
-	 		 		var rows;
-	 		 		var row = {};
- 		 		
-					var element = {chartOfAccId:[], debit:[], credit:[],
- 				 	chequeNo:[], projectCode:[], mrNo:[], departmentId:[]};
- 		 			
- 		 			element["chartOfAccId"] = $("#controllhead").val();
-			 		element["debit"] = $("#debit").val();
-			 		element["credit"] = $("#credit").val();
-			 		element["chequeNo"] = $("#chequeno").val();
-			 		element["projectCode"] = $("#project").val();
-			 		element["mrNo"] = $("#mrno").val();
-			 		element["departmentId"] = $("#department").val();
-			 		
-			 		row.push(element);
-			 		alert(JSON.stringify(row));
- 		 							
-					var dataTable = '<tr><td>'+element["chartOfAccId"]+'</td><td>'
-					+element["debit"]+'</td><td>'+element["credit"]
-					+'</td><td>'+element["chequeNo"]+'</td><td>'+element["projectCode"]
-					+'</td><td>'+element["mrNo"]+'</td><td>'+element["departmentId"]
-					+'</td></tr>'; 
+ 		 		 $("#add").click(function(event){
+ 		 			 if(validator()){
+ 		 				 
+ 		 				var row = {};
+ 		 		 		
+ 						 var element = {chartOfAccId:[], debit:[], credit:[],
+ 	 				 	 chequeNo:[], projectCode:[], mrNo:[], departmentId:[]};
+ 	 				 	
+ 	 				 	 var data= [];
+ 	 				 	
+						var t = $("#showtable").DataTable();
+ 	 		 			
+ 	 		 			element["chartOfAccId"] = $("#controllhead").val();
+ 				 		element["debit"] = $("#debit").val();
+ 				 		element["credit"] = $("#credit").val();
+ 				 		element["chequeNo"] = $("#chequeno").val();
+ 				 		element["projectCode"] = $("#project").val();
+ 				 		element["mrNo"] = $("#mrno").val();
+ 				 		element["departmentId"] = $("#department").val();
+ 				 		//alert(JSON.stringify(element));
+ 				 		data.push(element);
+ 				 		
+ 				 		alert(JSON.stringify(data));
+ 				 		
+ 	 		 							
+ 						var dataTable = '<tr><td>'+element["chartOfAccId"]+'</td><td>'
+ 						+element["debit"]+'</td><td>'+element["credit"]
+ 						+'</td><td>'+element["chequeNo"]+'</td><td>'+element["projectCode"]
+ 						+'</td><td>'+element["mrNo"]+'</td><td>'+element["departmentId"]
+ 						+'</td></tr>';
+ 					
+	 		 		  $("#showtable").append(dataTable);						
 					
-					$("#showtable").append(dataTable);
+ 					}		
 
 		 })
 		 
 		 // ---------------- End of - Save Button function----------------------
 		 
-		 // ---------------- Start - Create Table data----------------------
-		 
-		 	function createTable(){
-				
-			}
-		 // ---------------- End of - Create Table data----------------------
 		 
 		 // ------------------ Start - SaveVoucher Button---------------------
-		 	 $("#saveVoucher").click(function(event){
+		 	 $("#save").click(function(event){
 			 	event.preventDefault();
 			 	
 			 	var i = 1;
@@ -177,7 +191,7 @@ $(document).ready(function(){
 			 	
 			 	if(i >1){
 			 		var element = {chartOfAccId:[], debit:[], credit:[], 
-			 			chequeNo:[], projectCode:[], mrNo:[], departmentId:[]};
+			 		chequeNo:[], projectCode:[], mrNo:[], departmentId:[]};
 			 		
 			 		element["chartOfAccId"] = tableData[0];
 			 		element["debit"] = tableData[1];
@@ -219,52 +233,8 @@ $(document).ready(function(){
 		 
 		 // ------------------- End Of  SaveVoucher Button
 		 
-
-		 // ------------------------Start- Finish Button -----------------
-		$("#finish").click(function(event) {
-			event.preventDefault();
-
-				if (validator()) {
-					var data = {};
-
-					data["voucher"] = $("#voucher").val();
-					data["transaction"] = $("#transaction").val();
-					data["voucher_id"] = $("#voucherid").val();
-					data["date"] = $("#date").val();
-					data["project"] = $("#project").val();
-					data["department"] = $("#department").val();
-					data["cash_in_hand"] = $("#cashinhand").val();
-					data["bank_account"] = $("bankacc").val();
-					data["cheque_no"] = $("#chequeno").val();
-					data["mr_no"] = $("#mrno").val();
-					data["controll_head"] = $("#controllhead").val();
-					data["debit"] = $("#debit").val();
-					data["credit"] = $("#credit").val();
-					alert(JSON.stringify(error));
-
-						$.ajax({
-							type : "POST",
-							url : "/saveVoucher",
-							data : JSON.stringify(data),
-							contentType : "application/json; charset=utf-8",
-							success : function(
-									successData) {
-								$("#successMessage").html(successData);
-								$("#successMessage").removeClass("hidden");
-								$("#errorMessage").addClass("hidden");
-							},
-							error : function(
-									error) {
-								$("#errorMessage").html("Error: Record Not Saved");
-								$("#errorMessage").removeClass("hidden");
-								$("#submit").prop("disabled",false);
-								alert(JSON.stringify(error));
-							}
-
-						});
-					}
-				});
-		 // ----------------------End of - Finish Button -----------------------
+ 		 		 })
+		 
 
 		 // --------------------- Start Validator Function-----------------------
 						function validator() {
@@ -283,7 +253,7 @@ $(document).ready(function(){
 							var debit = $.trim($("#debit").val());
 							var credit = $.trim($("#credit").val())
 
-							if (voucher == 0) {
+							/* if (voucher == 0) {
 								$("#errorMessage").html("!! You must check a voucher type!!");
 								$("#errorMessage").removeClass("hidden");
 								$("#successMessage").addClass("hidden");
@@ -294,7 +264,7 @@ $(document).ready(function(){
 								$("#errorMessage").removeClass("hidden");
 								$("#successMessage").addClass("hidden");
 								return false;
-							}
+							} */
 							if (voucherId == "") {
 								$("#errorMessage").html("!! Please enter a voucher ID");
 								$("#errorMessage").removeClass("hidden");
@@ -349,22 +319,22 @@ $(document).ready(function(){
 								$("#successMessage").addClass("hidden");
 								return false;
 							}
-							/* if (debit == "") {
+							if (isNaN(debit)) {
 								$("#errorMessage").html("Please enter your Debit balance!!");
 								$("#errorMessage").removeClass("hidden");
 								$("#successMessage").addClass("hidden");
 								return false;
 							}
-							if (credit == "") {
+							if (isNaN(credit)) {
 								$("#errorMessage").html("Please enter your credit balance!!");
 								$("#errorMessage").removeClass("hidden");
 								$("#successMessage").addClass("hidden");
 								return false;
-							} */
+							}
 
 							return true;
 						}
-});
+		 
 
 </script>
 
@@ -526,7 +496,7 @@ $(document).ready(function(){
 							<div class="form-group">
 								<div class="col-md-8 col-md-offset-4" style="padding-top: 5px">
 									<input type="submit" class="btn btn-lg btn-success col-md-6"
-										name="save" value="Save" id="save">
+										name="add" value="ADD" id="add">
 								</div>
 							</div>
 						</div>
@@ -567,7 +537,7 @@ $(document).ready(function(){
 					<input type="text" class="form-control" name="creditbal"
 						id="creditbal">
 				</div>
-				<div class="col-sm-3" style="padding-bottom: 5px">
+				<div class="col-sm-3 hidden" style="padding-bottom: 5px">
 					<input type="submit" class="btn btn-lg btn-success" name="finish"
 						value="FINISH" id="finish">
 				</div>
@@ -593,7 +563,7 @@ $(document).ready(function(){
 					<input type="submit" class="btn btn-danger" name="clear" value="CLEAR" id="clear">
 				</div>
 				<div class="col-sm-3">
-					<input type="submit" name="savevoucher" value="SAVE VOUCHER" class="btn btn-success" id="savevoucher"
+					<input type="submit" name="save" value="SAVE" class="btn btn-success" id="save"
 						class="col-sm-10">
 				</div>
 				<div class="col-sm-3"></div>

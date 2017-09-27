@@ -5,8 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.daffodil.ssb.model.Country;
-
+import edu.daffodil.ssb.dao.Country;
 import edu.daffodil.ssb.dao.CountryDao;
 
 @Service("countryService")

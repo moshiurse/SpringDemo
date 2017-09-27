@@ -10,8 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.daffodil.ssb.model.Employee;
-
+import edu.daffodil.ssb.dao.Employee;
 import edu.daffodil.ssb.services.EmployeeService;
 
 
