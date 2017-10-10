@@ -30,6 +30,7 @@
 	                <li><a href="${pageContext.request.contextPath}/showresult">Show Result</a></li>
 	                <li><a href="${pageContext.request.contextPath}/voucher">Voucher</a></li>
 	                <li><a href="${pageContext.request.contextPath}/chartofaccount">Chart Of Accounts</a></li>
+	                <li><a href="${pageContext.request.contextPath}/table">Sample Table</a></li>
 	                
 	                <li role="separator" class="divider"></li>
 	                <li class="dropdown-header">Reports</li>

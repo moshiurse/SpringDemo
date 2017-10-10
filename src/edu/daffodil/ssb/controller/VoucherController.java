@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import edu.daffodil.ssb.dao.ChartOfAccount;
-import edu.daffodil.ssb.dao.Voucher;
 import edu.daffodil.ssb.dao.VoucherDetail;
 import edu.daffodil.ssb.dao.VoucherMaster;
 import edu.daffodil.ssb.services.VoucherService;

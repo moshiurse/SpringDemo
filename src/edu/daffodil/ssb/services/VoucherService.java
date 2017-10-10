@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import edu.daffodil.ssb.dao.ChartOfAccount;
-import edu.daffodil.ssb.dao.Voucher;
 import edu.daffodil.ssb.dao.VoucherDao;
 import edu.daffodil.ssb.dao.VoucherDetail;
 import edu.daffodil.ssb.dao.VoucherMaster;

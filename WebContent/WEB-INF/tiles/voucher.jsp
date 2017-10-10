@@ -138,13 +138,13 @@ $(document).ready(function(){
  		 			 if(validator()){
  		 				 
  		 				var row = {};
+ 		 				
+ 		 				
  		 		 		
  						 var element = {chartOfAccId:[], debit:[], credit:[],
  	 				 	 chequeNo:[], projectCode:[], mrNo:[], departmentId:[]};
  	 				 	
- 	 				 	 var data= [];
- 	 				 	
-						var t = $("#showtable").DataTable();
+ 	 				 	var data= [];
  	 		 			
  	 		 			element["chartOfAccId"] = $("#controllhead").val();
  				 		element["debit"] = $("#debit").val();
@@ -153,20 +153,29 @@ $(document).ready(function(){
  				 		element["projectCode"] = $("#project").val();
  				 		element["mrNo"] = $("#mrno").val();
  				 		element["departmentId"] = $("#department").val();
- 				 		//alert(JSON.stringify(element));
+ 				 		
  				 		data.push(element);
  				 		
  				 		alert(JSON.stringify(data));
  				 		
  	 		 							
- 						var dataTable = '<tr><td>'+element["chartOfAccId"]+'</td><td>'
+ 						var dataTable = '<tbody><tr><td>'+element["chartOfAccId"]+'</td><td>'
  						+element["debit"]+'</td><td>'+element["credit"]
  						+'</td><td>'+element["chequeNo"]+'</td><td>'+element["projectCode"]
  						+'</td><td>'+element["mrNo"]+'</td><td>'+element["departmentId"]
- 						+'</td></tr>';
+ 						+'</td></tr></tbody>';
  					
-	 		 		  $("#showtable").append(dataTable);						
-					
+	 		 		  $("#showtable").append(dataTable);
+	 		 		  
+	 		 		  var index = $("#showtable tr").length;
+	 		 		   $("#showtable tr").each(function(index){
+	 		 			  
+	 		 			  var row = $(tr).find('td:eq(0)').text()
+	 		 		  }) 
+
+	 		 		  var temp = $("#showtable tr").eq(0);
+	 		 		  alert(temp);
+
  					}		
 
 		 })
@@ -178,162 +187,155 @@ $(document).ready(function(){
 		 	 $("#save").click(function(event){
 			 	event.preventDefault();
 			 	
-			 	var i = 1;
-			 	// var data = {};
-			 	var voucherDetail = [];
-			 	
-			 	 $("#showtable tr").each(function(){
-			 		
-			 		var tableData = $(this).children("td").map(function(){
+			 	 var myRows = [];
+				  var $headers = $("th");
+				  var $rows = $("tbody tr").each(function(index) {
+				    $cells = $(this).find("td");
+				    myRows[index] = {};
+				    $cells.each(function(cellIndex) {
+				      myRows[index][$($headers[cellIndex]).html()] = $(this).html();
+				    });    
+				  });
+				  var myObj = {};
+				  myObj.myrows = myRows;
+				  alert(JSON.stringify(myObj)); 
+				  
+				  	/* var $table = $("#showtable")
+				    rows = [] ,
+				    header = [];
+				  
+				  
+		 			$table.find("tbody tr").each(function () {
+				    var row = {};
+				    
+				    $(this).find("td").each(function (i) {
+				        var key = i;
+			          value = $(this).html();
+				       row[key] = value;
+				        
+				    });
+				    
+				    rows.push(row); 
+				});    
+				alert(JSON.stringify(rows));*/
 			 			
-			 		return $(this).html();
-			 	}).get(); 
-			 	
-			 	if(i >1){
-			 		var element = {chartOfAccId:[], debit:[], credit:[], 
-			 		chequeNo:[], projectCode:[], mrNo:[], departmentId:[]};
-			 		
-			 		element["chartOfAccId"] = tableData[0];
-			 		element["debit"] = tableData[1];
-			 		element["credit"] = tableData[2];
-			 		element["chequeNo"] = tableData[3];
-			 		element["projectCode"] = tableData[4];
-			 		element["mrNo"] = tableData[5];
-			 		element["departmentId"] = tableData[6];
-			 		voucherDetail.push(element);
-			 		
-			 	}
-			 	i++;
-			 	
-			 	});
-			 	// master ?? 
-			 	// all column?
-				/* data["voucherNo"] = $("#voucherid").val();
-				data["voucherDate"] = $("#date").val();
-				data["controllHead"] = $("#controllhead").val();
-				data["narration"] = $("#narration").val();
-								
-				 alert(JSON.stringify(data));
-				$.ajax({
-					type: "POST",
-					url: "saveVoucher",
-					data: JSON.stringify(data),
-					contentType: "application/json; charset=utf-8",
-					success: function (successData) {
-						alert("Successfully Inserted Voucher");
-					},
-					error: function(error){
-						alert(JSON.stringify(error));
-					}
-				});
-				 */
-				
 		 })
-		  
-		 
+
 		 // ------------------- End Of  SaveVoucher Button
 		 
  		 		 })
 		 
 
 		 // --------------------- Start Validator Function-----------------------
-						function validator() {
+			function validator() {
 
-							var voucher = $.trim($("#voucher").val());
-							var transaction = $.trim($("#transaction").val());
-							var voucherId = $.trim($("#voucherid").val());
-							var date = $.trim($("#date").val());
-							var project = $.trim($("#project").val());
-							var department = $.trim($("#department").val());
-							var cashInHand = $.trim($("#cashinhand").val());
-							var bankAcc = $.trim($("#bankacc").val());
-							var chequeNo = $.trim($("#chequeno").val());
-							var mrNo = $.trim($("#mrno").val());
-							var controllHead = $.trim($("#controllhead").val());
-							var debit = $.trim($("#debit").val());
-							var credit = $.trim($("#credit").val())
+				var voucher = $.trim($("#voucher").val());
+				var transaction = $.trim($("#transaction").val());
+				var voucherId = $.trim($("#voucherid").val());
+				var date = $.trim($("#date").val());
+				var project = $.trim($("#project").val());
+				var department = $.trim($("#department").val());
+				var cashInHand = $.trim($("#cashinhand").val());
+				var bankAcc = $.trim($("#bankacc").val());
+				var chequeNo = $.trim($("#chequeno").val());
+				var mrNo = $.trim($("#mrno").val());
+				var controllHead = $.trim($("#controllhead").val());
+				var debit = $.trim($("#debit").val());
+				var credit = $.trim($("#credit").val())
 
-							/* if (voucher == 0) {
-								$("#errorMessage").html("!! You must check a voucher type!!");
-								$("#errorMessage").removeClass("hidden");
-								$("#successMessage").addClass("hidden");
-								return false;
-							}
-							if (transaction == 0) {
-								$("#errorMessage").html("You must check a transaction type!!");
-								$("#errorMessage").removeClass("hidden");
-								$("#successMessage").addClass("hidden");
-								return false;
-							} */
-							if (voucherId == "") {
-								$("#errorMessage").html("!! Please enter a voucher ID");
-								$("#errorMessage").removeClass("hidden");
-								$("#successMessage").addClass("hidden");
-								return false;
-							}
-							if (date == "") {
-								$("#errorMessage").html("!! Please enter Date");
-								$("#errorMessage").removeClass("hidden");
-								$("#successMessage").addClass("hidden");
-								return false;
-							}
-							if (project == "") {
-								$("#errorMessage").html("!! Please enter your project!!");
-								$("#errorMessage").removeClass("hidden");
-								$("#successMessage").addClass("hidden");
-								return false;
-							}
-							if (department == "") {
-								$("#errorMessage").html("!! Please enter your Department");
-								$("#errorMessage").removeClass("hidden");
-								$("#successMessage").addClass("hidden");
-								return false;
-							}
-							/* if (cashInHand == "") {
-								$("#errorMessage").html("!! Please enter Cash in Hand Amount");
-								$("#errorMessage").removeClass("hidden");
-								$("#successMessage").addClass("hidden");
-								return false;
-							}
-							if (bankAcc == "") {
-								$("#errorMessage").html("Please enter Bank Account!!");
-								$("#errorMessage").removeClass("hidden");
-								$("#successMessage").addClass("hidden");
-								return false;
-							}
-							if (chequeNo == "") {
-								$("#errorMessage").html("!!Please enter Cheque no!!");
-								$("#errorMessage").removeClass("hidden");
-								$("#successMessage").addClass("hidden");
-								return false;
-							} */
-							if (mrNo == "") {
-								$("#errorMessage").html("Please enter MR No !!");
-								$("#errorMessage").removeClass("hidden");
-								$("#successMessage").addClass("hidden");
-								return false;
-							}
-							if (controllHead == "") {
-								$("#errorMessage").html("!! Please enter Control Head !!");
-								$("#errorMessage").removeClass("hidden");
-								$("#successMessage").addClass("hidden");
-								return false;
-							}
-							if (isNaN(debit)) {
-								$("#errorMessage").html("Please enter your Debit balance!!");
-								$("#errorMessage").removeClass("hidden");
-								$("#successMessage").addClass("hidden");
-								return false;
-							}
-							if (isNaN(credit)) {
-								$("#errorMessage").html("Please enter your credit balance!!");
-								$("#errorMessage").removeClass("hidden");
-								$("#successMessage").addClass("hidden");
-								return false;
-							}
+				/* if (voucher == 0) {
+					$("#errorMessage").html("!! You must check a voucher type!!");
+					$("#errorMessage").removeClass("hidden");
+					$("#successMessage").addClass("hidden");
+					return false;
+				}
+				if (transaction == 0) {
+					$("#errorMessage").html("You must check a transaction type!!");
+					$("#errorMessage").removeClass("hidden");
+					$("#successMessage").addClass("hidden");
+					return false;
+				} */
+				if (voucherId == "") {
+					$("#errorMessage").html("!! Please enter a voucher ID");
+					$("#errorMessage").removeClass("hidden");
+					$("#successMessage").addClass("hidden");
+					return false;
+				}
+				if (date == "") {
+					$("#errorMessage").html("!! Please enter Date");
+					$("#errorMessage").removeClass("hidden");
+					$("#successMessage").addClass("hidden");
+					return false;
+				}
+				if (project == "") {
+					$("#errorMessage").html("!! Please enter your project!!");
+					$("#errorMessage").removeClass("hidden");
+					$("#successMessage").addClass("hidden");
+					return false;
+				}
+				if (department == "") {
+					$("#errorMessage").html("!! Please enter your Department");
+					$("#errorMessage").removeClass("hidden");
+					$("#successMessage").addClass("hidden");
+					return false;
+				}
+				/* if (cashInHand == "") {
+					$("#errorMessage").html("!! Please enter Cash in Hand Amount");
+					$("#errorMessage").removeClass("hidden");
+					$("#successMessage").addClass("hidden");
+					return false;
+				}
+				if (bankAcc == "") {
+					$("#errorMessage").html("Please enter Bank Account!!");
+					$("#errorMessage").removeClass("hidden");
+					$("#successMessage").addClass("hidden");
+					return false;
+				}
+				if (chequeNo == "") {
+					$("#errorMessage").html("!!Please enter Cheque no!!");
+					$("#errorMessage").removeClass("hidden");
+					$("#successMessage").addClass("hidden");
+					return false;
+				} */
+				if (mrNo == "") {
+					$("#errorMessage").html("Please enter MR No !!");
+					$("#errorMessage").removeClass("hidden");
+					$("#successMessage").addClass("hidden");
+					return false;
+				}
+				if (controllHead == "") {
+					$("#errorMessage").html("!! Please enter Control Head !!");
+					$("#errorMessage").removeClass("hidden");
+					$("#successMessage").addClass("hidden");
+					return false;
+				}
+				if (isNaN(debit)) {
+					$("#errorMessage").html("Please enter your Debit balance!!");
+					$("#errorMessage").removeClass("hidden");
+					$("#successMessage").addClass("hidden");
+					return false;
+				}
+				if (isNaN(credit)) {
+					$("#errorMessage").html("Please enter your credit balance!!");
+					$("#errorMessage").removeClass("hidden");
+					$("#successMessage").addClass("hidden");
+					return false;
+				}
 
-							return true;
-						}
+					return true;
+			}
+			
+			function validateCh(){
+				var count = $("#showtable tr").length-1;
+				var table = $("#showtable");
+				var row = $table.find("tr");
+				for(var i = 1; i<count; i++){
+					
+				}
+				
+				//var col = $('#showtable tr td:nth-child(1)'); 
+				
+			}
 		 
 
 </script>
@@ -510,6 +512,7 @@ $(document).ready(function(){
 			<div class="panel panel-default">
 				<div >
 					<table class="table" id="showtable">
+					<thead>
 						<tr>
 							<th>ACCOUNT HEAD</th>
 							<th>DEBIT</th>
@@ -519,6 +522,7 @@ $(document).ready(function(){
 							<th>MR.NO</th>
 							<th>DEPT NAME</th>
 						</tr>
+						</thead>
 
 					</table>
 				</div>
