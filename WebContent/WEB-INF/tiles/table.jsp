@@ -8,23 +8,8 @@
 <script type="text/javascript">
 $(document).ready(function(){
 		
-		var count = $("#table tr").length;
-		alert(count);
-		var table = $("#table tr");
-		alert(table.text());
-		//var h = 2;
-		var col = 0;
-		//var col = $('#showtable tr td:nth-child(2)').text(); 
-		//alert(col);
-		for(var i=1; i<count; i++){
-			col = $table.eq(i).find("td").eq(2);
-			alert(col);
-		}
+
 		
-		
-		
-		
-	
 	$('#showdetail').click( function() {
 		  alert("Show Detail");
 		  

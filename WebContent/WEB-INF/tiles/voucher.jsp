@@ -131,16 +131,12 @@ $(document).ready(function(){
 					 
 	// ---------------End of - Disable some input after Click RadioButton--------------------
 	
-	$("#add").click(function(event){
-		})
 	// ------------------- Start- Save Button function----------------------------- 
  		 		 $("#add").click(function(event){
  		 			 if(validator()){
  		 				 
  		 				var row = {};
  		 				
- 		 				
- 		 		 		
  						 var element = {chartOfAccId:[], debit:[], credit:[],
  	 				 	 chequeNo:[], projectCode:[], mrNo:[], departmentId:[]};
  	 				 	
@@ -157,17 +153,32 @@ $(document).ready(function(){
  				 		data.push(element);
  				 		
  				 		alert(JSON.stringify(data));
- 				 		
- 	 		 							
- 						var dataTable = '<tbody><tr><td>'+element["chartOfAccId"]+'</td><td>'
- 						+element["debit"]+'</td><td>'+element["credit"]
- 						+'</td><td>'+element["chequeNo"]+'</td><td>'+element["projectCode"]
- 						+'</td><td>'+element["mrNo"]+'</td><td>'+element["departmentId"]
- 						+'</td></tr></tbody>';
- 					
-	 		 		  $("#showtable").append(dataTable);
+ 				 		var duplicate = false;
+ 				 		$('#showtable tbody tr').each(function () {
+ 				        	
+ 					        $controllhead = $(this).find('td:eq(0)').text();
+ 					        if ($controllhead == $('#controllhead').val()) {
+ 					            alert('ERROR DUPLICATE CH');
+ 					           duplicate = true;
+ 					            return;
+ 					        }
+ 					        
+ 					    });
+ 				        
+ 				 		if(duplicate == false ){
+ 				 			var dataTable = '<tbody><tr><td>'+element["chartOfAccId"]+'</td><td>'
+ 	 						+element["debit"]+'</td><td>'+element["credit"]
+ 	 						+'</td><td>'+element["chequeNo"]+'</td><td>'+element["projectCode"]
+ 	 						+'</td><td>'+element["mrNo"]+'</td><td>'+element["departmentId"]
+ 	 						+'</td></tr></tbody>';
+ 	 					
+ 		 		 		  $("#showtable").append(dataTable);
+ 				 		} else {
+ 				 			alert("You cant add same head more then one");
+ 				 		}
+ 						
 	 		 		  
-	 		 		  var index = $("#showtable tr").length;
+	 		 		 /*  var index = $("#showtable tr").length;
 	 		 		   $("#showtable tr").each(function(index){
 	 		 			  
 	 		 			  var row = $(tr).find('td:eq(0)').text()
@@ -175,10 +186,10 @@ $(document).ready(function(){
 
 	 		 		  var temp = $("#showtable tr").eq(0);
 	 		 		  alert(temp);
-
+ */
  					}		
 
-		 })
+		 });
 		 
 		 // ---------------- End of - Save Button function----------------------
 		 
@@ -187,37 +198,31 @@ $(document).ready(function(){
 		 	 $("#save").click(function(event){
 			 	event.preventDefault();
 			 	
-			 	 var myRows = [];
-				  var $headers = $("th");
-				  var $rows = $("tbody tr").each(function(index) {
-				    $cells = $(this).find("td");
-				    myRows[index] = {};
-				    $cells.each(function(cellIndex) {
-				      myRows[index][$($headers[cellIndex]).html()] = $(this).html();
-				    });    
-				  });
-				  var myObj = {};
-				  myObj.myrows = myRows;
-				  alert(JSON.stringify(myObj)); 
-				  
-				  	/* var $table = $("#showtable")
-				    rows = [] ,
-				    header = [];
-				  
-				  
-		 			$table.find("tbody tr").each(function () {
-				    var row = {};
-				    
-				    $(this).find("td").each(function (i) {
-				        var key = i;
-			          value = $(this).html();
-				       row[key] = value;
-				        
-				    });
-				    
-				    rows.push(row); 
-				});    
-				alert(JSON.stringify(rows));*/
+		 	var $table = $("#showtable")
+		    rows = [],
+		    header = [];
+
+			 $table.find("thead th").each(function () {
+			    header.push($(this).html());
+			});
+
+			$table.find("tbody tr").each(function () {
+			    var row = {};
+			    
+			    $(this).find("td").each(function (i) {
+			        var key = header[i],
+		            value = $(this).html(); 
+			        row[key] = value;
+			    });
+			    
+			    rows.push(row);
+			});    
+			alert(JSON.stringify(rows));
+			
+			var data = {};
+			var voucherDetails = [];
+			
+
 			 			
 		 })
 
@@ -260,20 +265,17 @@ $(document).ready(function(){
 					$("#errorMessage").removeClass("hidden");
 					$("#successMessage").addClass("hidden");
 					return false;
-				}
-				if (date == "") {
+				} else if (date == "") {
 					$("#errorMessage").html("!! Please enter Date");
 					$("#errorMessage").removeClass("hidden");
 					$("#successMessage").addClass("hidden");
 					return false;
-				}
-				if (project == "") {
+				} else if (project == "") {
 					$("#errorMessage").html("!! Please enter your project!!");
 					$("#errorMessage").removeClass("hidden");
 					$("#successMessage").addClass("hidden");
 					return false;
-				}
-				if (department == "") {
+				} else if (department == "") {
 					$("#errorMessage").html("!! Please enter your Department");
 					$("#errorMessage").removeClass("hidden");
 					$("#successMessage").addClass("hidden");
@@ -297,47 +299,31 @@ $(document).ready(function(){
 					$("#successMessage").addClass("hidden");
 					return false;
 				} */
-				if (mrNo == "") {
+				else if (mrNo == "") {
 					$("#errorMessage").html("Please enter MR No !!");
 					$("#errorMessage").removeClass("hidden");
 					$("#successMessage").addClass("hidden");
 					return false;
-				}
-				if (controllHead == "") {
+				} else if (controllHead == "") {
 					$("#errorMessage").html("!! Please enter Control Head !!");
 					$("#errorMessage").removeClass("hidden");
 					$("#successMessage").addClass("hidden");
 					return false;
-				}
-				if (isNaN(debit)) {
+				}  else if (isNaN(debit)) {
 					$("#errorMessage").html("Please enter your Debit balance!!");
 					$("#errorMessage").removeClass("hidden");
 					$("#successMessage").addClass("hidden");
 					return false;
-				}
-				if (isNaN(credit)) {
+				} else if (isNaN(credit)) {
 					$("#errorMessage").html("Please enter your credit balance!!");
 					$("#errorMessage").removeClass("hidden");
 					$("#successMessage").addClass("hidden");
 					return false;
-				}
+				} 
 
 					return true;
 			}
 			
-			function validateCh(){
-				var count = $("#showtable tr").length-1;
-				var table = $("#showtable");
-				var row = $table.find("tr");
-				for(var i = 1; i<count; i++){
-					
-				}
-				
-				//var col = $('#showtable tr td:nth-child(1)'); 
-				
-			}
-		 
-
 </script>
 
 </head>
