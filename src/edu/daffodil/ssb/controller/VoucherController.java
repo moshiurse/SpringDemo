@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.daffodil.ssb.model.BankAccount;
+
 import edu.daffodil.ssb.dao.ChartOfAccount;
 import edu.daffodil.ssb.dao.VoucherDetail;
 import edu.daffodil.ssb.dao.VoucherMaster;
@@ -43,11 +45,12 @@ public class VoucherController{
 		
 		for(VoucherDetail voucherDetail: voucherMaster.getVoucherDetails()){
 
-			voucherDetail.setVdVoucherNo(voucherMaster);
+			voucherDetail.setVoucherNo(voucherMaster);
 			System.out.println(voucherMaster.toString());
-			voucherDetail.setProjectCode(null);
-			voucherDetail.setChartOfAccId(null);
-			voucherDetail.setDepartmentId(null);
+			//voucherDetail.setProjectCode(null);
+			//voucherDetail.setChartOfAccId(null);
+			//voucherDetail.setDepartmentId(null);
+			voucherDetail.setBankId(1);
 			if(voucherDetail.getCredit()== 0){
 				voucherDetail.setCredit(0);
 			}else if (voucherDetail.getDebit()== 0) {
@@ -63,12 +66,19 @@ public class VoucherController{
 	
 	
 	
-	@RequestMapping(value="/showControllHead",method=RequestMethod.POST)
+	@RequestMapping(value="/showChartOfAccount",method=RequestMethod.POST)
 	public @ResponseBody List<ChartOfAccount> showControllHead(){	
 		System.out.println("request received");
-		return voucherService.showControllHead();
+		return voucherService.showChartOfAccount();
 			
 	}
+	
+	@RequestMapping(value="/showBankAccount", method=RequestMethod.POST)
+	public @ResponseBody List<BankAccount> showbankAccount(){
+		System.out.println("bank account recieved controller");
+		return voucherService.showbankAccount();
+	}
+	
 	
 	
 

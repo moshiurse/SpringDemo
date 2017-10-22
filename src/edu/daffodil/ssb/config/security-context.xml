@@ -34,6 +34,7 @@
 		<security:intercept-url pattern="/login" access="permitAll" />
 		<security:intercept-url pattern="/loggedout" access="permitAll" />
 		<security:intercept-url pattern="/" access="permitAll" />
+		<security:intercept-url pattern="/voucher" access="permitAll" />
 		<security:intercept-url pattern="/registration" access="permitAll" />	
 		<security:intercept-url pattern="/showresult" access="permitAll" />	
 		<security:intercept-url pattern="/studentresult" access="permitAll" />	
@@ -41,17 +42,16 @@
 		
 		<security:intercept-url pattern="/home" access="permitAll" />
 		<security:intercept-url pattern="/welcome" access="isAuthenticated()" />
-		<security:intercept-url pattern="/employee" access="permitAll" />
+		<security:intercept-url pattern="/employee" access="isAuthenticated()" />
 		<security:intercept-url pattern="/saveEmployee/{id}" access="permitAll" />
 		<security:intercept-url pattern="/deleteEmployee" access="permitAll" />
 		<security:intercept-url pattern="/showEmployeeList" access="permitAll" />	
 		<security:intercept-url pattern="/showEmployeeById" access="permitAll" />	
 		<security:intercept-url pattern="/showCountryList" access="isAuthenticated()" />
 		<security:intercept-url pattern="/saveUser" access="permitAll" />
-		<security:intercept-url pattern="/voucher" access="permitAll" />
 		<security:intercept-url pattern="/saveVoucher" access="permitAll" />
-		<security:intercept-url pattern="/saveVoucherMaster" access="permitAll" />
-		<security:intercept-url pattern="/showControllHead" access="permitAll" />
+		<security:intercept-url pattern="/showChartOfAccount" access="permitAll" />
+		<security:intercept-url pattern="/showBankAccount" access="permitAll" />
 		<security:intercept-url pattern="/chartofaccount" access="permitAll" />
 		<security:intercept-url pattern="/table" access="permitAll" />
 		

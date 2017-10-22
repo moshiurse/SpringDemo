@@ -16,7 +16,8 @@ $(document).ready(function(){
 	showControllHead();
 	radioCheck();
 	firstcheck();
-// ------------------- End of Calling all methods ------------------------	
+	//showBankAccount();
+// ------------------- End of Calling all methods ------------------------
 
 
 //----------------Start - Datepicker For Date Input-------------------
@@ -28,7 +29,7 @@ $(document).ready(function(){
 		
 		//--------------End of - Datepicker---------
 		
-
+		
 		// First Checked value functionality...
 		function firstcheck(){
 			
@@ -63,12 +64,12 @@ $(document).ready(function(){
 		function showControllHead() {
 
 			
-			$.post("showControllHead", function(ca){
+			$.post("showChartOfAccount", function(ca){
 				
 				var option = '<select class="form-control" id="controllhead" name="controllhead"><option value="0">Select</option>';
 				
 				for(var key in ca){
-					option += '<option value="'+ca[key].caName+'"> '+ca[key].caName+'</option>'
+					option += '<option value="'+ca[key].caId+'"> '+ca[key].caName+'</option>'
 				}
 				
 				option += '</select>';
@@ -78,6 +79,29 @@ $(document).ready(function(){
 			});
 		}
 		
+		
+//---------------------Start Bankid Autocomplete ---------------
+		
+		  function showBankAccount(){
+			//var data = ["Dhaka", "Mymensingh", "Barisal", "Rangpur", "Khulna", "sylhet","Chittagong"];
+			
+			$.post("showBankAccount", function(ba){
+				
+				for(var key in ba){
+						data[key] = ba[key].accountNumber;
+						alert(data);
+				}
+			})
+			$('#bankacc').autocomplete({
+			    source: data,
+			    minLength: 1
+			});
+			
+			 
+		}
+		 
+		
+		//---------------------------End bankNo--------------------------
 		
 					 
 	 //---------------------- End of Data Load to combo box Task Complete-------------------
@@ -177,16 +201,6 @@ $(document).ready(function(){
  				 			alert("You cant add same head more then one");
  				 		}
  						
-	 		 		  
-	 		 		 /*  var index = $("#showtable tr").length;
-	 		 		   $("#showtable tr").each(function(index){
-	 		 			  
-	 		 			  var row = $(tr).find('td:eq(0)').text()
-	 		 		  }) 
-
-	 		 		  var temp = $("#showtable tr").eq(0);
-	 		 		  alert(temp);
- */
  					}		
 
 		 });
@@ -197,32 +211,48 @@ $(document).ready(function(){
 		 // ------------------ Start - SaveVoucher Button---------------------
 		 	 $("#save").click(function(event){
 			 	event.preventDefault();
-			 	
-		 	var $table = $("#showtable")
-		    rows = [],
-		    header = [];
-
-			 $table.find("thead th").each(function () {
-			    header.push($(this).html());
-			});
-
-			$table.find("tbody tr").each(function () {
-			    var row = {};
-			    
-			    $(this).find("td").each(function (i) {
-			        var key = header[i],
-		            value = $(this).html(); 
-			        row[key] = value;
-			    });
-			    
-			    rows.push(row);
-			});    
-			alert(JSON.stringify(rows));
 			
 			var data = {};
-			var voucherDetails = [];
+			var getVoucherDetails= [];
 			
-
+			
+			
+			var i = 1;
+			
+			$('#showtable tbody tr').each(function(){
+				var element = {serialNo:[], chartOfAccId:[],projectCode:[],departmentId:[],debit:[],credit:[], chequeNo:[],mrNo:[]};
+				element["serialNo"] = i;
+				element["chartOfAccId"] = $(this).find('td:eq(0)').text();
+				element["debit"] = $(this).find('td:eq(1)').text();
+				element["credit"] = $(this).find('td:eq(2)').text();
+				element["chequeNo"] = $(this).find('td:eq(3)').text();
+				element["projectCode"] = $(this).find('td:eq(4)').text();
+				element["mrNo"] = $(this).find('td:eq(5)').text();
+				element["departmentId"] = $(this).find('td:eq(6)').text();
+				getVoucherDetails.push(element);
+				i++;
+			});
+			
+			
+			data["voucherNo"] = $("#voucherid").val();
+			data["voucherDate"] = $("#date").val();
+			data["narration"] = $("#narration").val();
+			data["voucherDetails"] = getVoucherDetails;
+			alert(JSON.stringify(data));
+			$.ajax({
+	             type: "POST",
+	             url: "saveVoucher",
+	             data: JSON.stringify(data),
+	             contentType: "application/json; charset=utf-8",             
+	             success: function (successData) {
+	            	 alert("Voucher inserted successfully!!");
+	             },
+	             error: function (error) {
+	                 alert("FAILED!!!");
+	                 
+	             }
+			}); 
+			
 			 			
 		 })
 

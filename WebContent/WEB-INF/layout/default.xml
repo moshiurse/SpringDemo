@@ -30,7 +30,7 @@
 	</definition>
 	
 	<definition name="employee" extends="software.base">
-		<put-attribute name="title" value="Welcome"></put-attribute>
+		<put-attribute name="title" value="Employee"></put-attribute>
 		<put-attribute name="content" value="/WEB-INF/tiles/employee.jsp"></put-attribute>
 	</definition>
 	
@@ -66,6 +66,12 @@
 	<definition name="table" extends="software.base">
 		<put-attribute name="title" value="Sample Table"></put-attribute>
 		<put-attribute name="content" value="/WEB-INF/tiles/table.jsp"></put-attribute>
+	
+	</definition>
+	
+	<definition name="autocomplete" extends="software.base">
+		<put-attribute name="title" value="jQuery Autocomplete"></put-attribute>
+		<put-attribute name="content" value="/WEB-INF/tiles/autocomplete.jsp"></put-attribute>
 	
 	</definition>
 </tiles-definitions>

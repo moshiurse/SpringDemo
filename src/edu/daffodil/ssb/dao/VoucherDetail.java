@@ -11,6 +11,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Null;
 
 @Entity
 @Table(name="acc_voucher_detail")
@@ -18,16 +19,15 @@ public class VoucherDetail implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 	
-	@JoinColumn(name="vd_vno")
-	@ManyToOne
-	private VoucherMaster vdVoucherNo;
+	
 	
 	@Column(name ="vd_sl_no")
 	private int serialNo;
 	
 	@Id
-	@Column(name ="vd_vno")
-	private String voucherNo;
+	@ManyToOne
+	@JoinColumn(name ="vd_vno")
+	private VoucherMaster vd_vno;
 	
 	@Id
 	@Column(name ="vd_ca_id")
@@ -79,25 +79,18 @@ public class VoucherDetail implements Serializable {
 		return serialNo;
 	}
 	
-	public VoucherMaster getVdVoucherNo() {
-		return vdVoucherNo;
-	}
-
-	public void setVdVoucherNo(VoucherMaster vdVoucherNo) {
-		this.vdVoucherNo = vdVoucherNo;
-	}
 	
 	
 	public void setSerialNo(int serialNo) {
 		this.serialNo = serialNo;
 	}
 
-	public String getVoucherNo() {
-		return voucherNo;
+	public VoucherMaster getVoucherNo() {
+		return vd_vno;
 	}
 
-	public void setVoucherNo(String voucherNo) {
-		this.voucherNo = voucherNo;
+	public void setVoucherNo(VoucherMaster voucherNo) {
+		this.vd_vno = voucherNo;
 	}
 
 	public String getChartOfAccId() {
@@ -206,7 +199,7 @@ public class VoucherDetail implements Serializable {
 
 	@Override
 	public String toString() {
-		return "VoucherDetail [serialNo=" + serialNo + ", voucherNo=" + voucherNo + ", chartOfAccId=" + chartOfAccId
+		return "VoucherDetail [serialNo=" + serialNo + ", voucherNo=" + vd_vno + ", chartOfAccId=" + chartOfAccId
 				+ ", projectCode=" + projectCode + ", departmentId=" + departmentId + ", debit=" + debit + ", credit="
 				+ credit + ", chequeNo=" + chequeNo + ", bookingId=" + bookingId + ", billNo=" + billNo + ", invoiceNo="
 				+ invoiceNo + ", mrNo=" + mrNo + ", description=" + description + ", bankId=" + bankId + ", bandleNo="

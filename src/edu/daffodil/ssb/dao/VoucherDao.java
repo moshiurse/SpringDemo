@@ -10,6 +10,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.daffodil.ssb.model.BankAccount;
+
 @Repository
 @Transactional
 @Component("voucherdao")
@@ -25,7 +27,7 @@ public class VoucherDao {
 	
 	
 	@SuppressWarnings("unchecked")
-	public List<ChartOfAccount> showControllHead() {
+	public List<ChartOfAccount> showChartOfAccount() {
 		System.out.println("inside dao");
 		List<ChartOfAccount> ca;
 		DetachedCriteria criteria = DetachedCriteria.forClass(ChartOfAccount.class);
@@ -45,6 +47,16 @@ public class VoucherDao {
 		session().save(voucherDetail);
 		System.out.println("DAO "+voucherDetail.toString());
 		
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<BankAccount> showbankAccount() {
+		System.out.println("bank Dao");
+		List<BankAccount> bankAcc;
+		DetachedCriteria criteria = DetachedCriteria.forClass(BankAccount.class);
+		bankAcc = criteria.getExecutableCriteria(session()).list();
+		System.out.println(bankAcc.toString());
+		return bankAcc;
 	}
 	
 	

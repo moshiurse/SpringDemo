@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.daffodil.ssb.model.BankAccount;
+
 import edu.daffodil.ssb.dao.ChartOfAccount;
 import edu.daffodil.ssb.dao.VoucherDao;
 import edu.daffodil.ssb.dao.VoucherDetail;
@@ -19,9 +21,9 @@ public class VoucherService {
 		this.voucherDao = voucherDao;
 	}
 	
-public List<ChartOfAccount> showControllHead() {
+public List<ChartOfAccount> showChartOfAccount() {
 		System.out.println("inside service");
-		return voucherDao.showControllHead();
+		return voucherDao.showChartOfAccount();
 	}
 
 public void saveVoucherMaster(VoucherMaster voucherMaster) {
@@ -34,6 +36,11 @@ public void saveVoucherDetail(VoucherDetail voucherDetail) {
 	voucherDao.saveVoucherDetail(voucherDetail);
 	System.out.println("Services "+voucherDetail.toString());
 	
+}
+
+public List<BankAccount> showbankAccount() {
+	System.out.println("show bank inside service");
+	return voucherDao.showbankAccount();
 }
 	
 }
