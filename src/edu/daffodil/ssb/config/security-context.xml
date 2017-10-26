@@ -35,7 +35,8 @@
 		<security:intercept-url pattern="/loggedout" access="permitAll" />
 		<security:intercept-url pattern="/" access="permitAll" />
 		<security:intercept-url pattern="/voucher" access="permitAll" />
-		<security:intercept-url pattern="/registration" access="permitAll" />	
+		<security:intercept-url pattern="/registration" access="permitAll" />
+		<security:intercept-url pattern="/autocomplete" access="permitAll" />	
 		<security:intercept-url pattern="/showresult" access="permitAll" />	
 		<security:intercept-url pattern="/studentresult" access="permitAll" />	
 		<security:intercept-url pattern="/saveResult" access="permitAll" />
@@ -52,6 +53,7 @@
 		<security:intercept-url pattern="/saveVoucher" access="permitAll" />
 		<security:intercept-url pattern="/showChartOfAccount" access="permitAll" />
 		<security:intercept-url pattern="/showBankAccount" access="permitAll" />
+		<security:intercept-url pattern="/showProject" access="permitAll" />
 		<security:intercept-url pattern="/chartofaccount" access="permitAll" />
 		<security:intercept-url pattern="/table" access="permitAll" />
 		

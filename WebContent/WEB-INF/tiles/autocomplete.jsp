@@ -12,7 +12,7 @@
 <fieldset>
 
 <!-- Form Name -->
-<legend>Form Name</legend>
+<legend>AutoComplete</legend>
 
 <!-- Text input-->
 <div class="form-group">

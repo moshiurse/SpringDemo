@@ -11,13 +11,8 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="acc_bank_account")
-public class BankAccount implements Serializable {
+public class BankAccount implements Serializable{
 	
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-
 	@Id
 	@Column(name="account_id")
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -28,14 +23,14 @@ public class BankAccount implements Serializable {
 	private int bankId;
 	
 	@Column(name="account_number")
-	private String accountNumber;
+	private String accountNo;
 	
 	@Column(name="branch")
 	private String branch;
 	
 	@Id
 	@Column(name="bank_acc_code")
-	private String bankAccountCode;
+	private String bankAccountCode;	
 	
 	@Id
 	@Column(name="company_id")
@@ -63,12 +58,12 @@ public class BankAccount implements Serializable {
 		this.bankId = bankId;
 	}
 
-	public String getAccountNumber() {
-		return accountNumber;
+	public String getAccountNo() {
+		return accountNo;
 	}
 
-	public void setAccountNumber(String accountNumber) {
-		this.accountNumber = accountNumber;
+	public void setAccountNo(String accountNo) {
+		this.accountNo = accountNo;
 	}
 
 	public String getBranch() {
@@ -110,6 +105,14 @@ public class BankAccount implements Serializable {
 	public void setCreatedBy(String createdBy) {
 		this.createdBy = createdBy;
 	}
+
+	@Override
+	public String toString() {
+		return "BankAccount [accountId=" + accountId + ", bankId=" + bankId + ", accountNo=" + accountNo + ", branch="
+				+ branch + ", bankAccountCode=" + bankAccountCode + ", companyId=" + companyId + ", display=" + display
+				+ ", createdBy=" + createdBy + "]";
+	}
+	
 	
 	
 

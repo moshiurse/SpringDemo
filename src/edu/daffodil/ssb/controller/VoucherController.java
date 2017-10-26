@@ -9,9 +9,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.daffodil.ssb.model.BankAccount;
-
+import edu.daffodil.ssb.dao.BankAccount;
 import edu.daffodil.ssb.dao.ChartOfAccount;
+import edu.daffodil.ssb.dao.Project;
 import edu.daffodil.ssb.dao.VoucherDetail;
 import edu.daffodil.ssb.dao.VoucherMaster;
 import edu.daffodil.ssb.services.VoucherService;
@@ -79,6 +79,11 @@ public class VoucherController{
 		return voucherService.showbankAccount();
 	}
 	
+	@RequestMapping(value="/showProject", method=RequestMethod.POST)
+	public @ResponseBody List<Project> showProject(){
+		System.out.println("Project recieved controller");
+		return voucherService.showProject();
+	}
 	
 	
 

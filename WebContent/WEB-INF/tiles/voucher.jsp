@@ -16,7 +16,8 @@ $(document).ready(function(){
 	showControllHead();
 	radioCheck();
 	firstcheck();
-	//showBankAccount();
+	showBankAccount();
+	showProject();
 // ------------------- End of Calling all methods ------------------------
 
 
@@ -60,7 +61,7 @@ $(document).ready(function(){
 		}
 		//Finished First Checked value functionality...
 		
-		//--------------------Start - Data Load to combo box----------------------
+		//--------------------Start - Show Controll Head to combo box----------------------
 		function showControllHead() {
 
 			
@@ -78,11 +79,52 @@ $(document).ready(function(){
 			
 			});
 		}
+		//--------------------End - Show Controll Head to combo box----------------------
+		
+		//--------------------Start - Project Code to combo box----------------------
+		function showProject() {
+
+			
+			$.post("showProject", function(project){
+				
+				var option = '<select class="form-control" id="project" name="project"><option value="0">Select</option>';
+				
+				for(var key in project){
+					option += '<option value="'+project[key].projectCode+'"> '+project[key].projectName+'</option>'
+				}
+				
+				option += '</select>';
+				
+				$("#projectdiv").html(option);
+			
+			});
+		}
+		//--------------------End - Project Code to combo box----------------------
+		
+				//--------------------Start - Show Bank Account to combo box----------------------
+		function showBankAccount() {
+
+			
+			$.post("showBankAccount", function(bank){
+				
+				var option = '<select class="form-control" id="bankacc" name="bankacc"><option value="0">Select</option>';
+				
+				for(var key in bank){
+					option += '<option value="'+bank[key].accountId+'"> '+bank[key].accountId+'</option>'
+				}
+				
+				option += '</select>';
+				
+				$("#bankaccdiv").html(option);
+			
+			});
+		}
+		//--------------------End - Show Bank Account to combo box----------------------
 		
 		
 //---------------------Start Bankid Autocomplete ---------------
 		
-		  function showBankAccount(){
+		 /*  function showBankAccount(){
 			//var data = ["Dhaka", "Mymensingh", "Barisal", "Rangpur", "Khulna", "sylhet","Chittagong"];
 			
 			$.post("showBankAccount", function(ba){
@@ -99,7 +141,7 @@ $(document).ready(function(){
 			
 			 
 		}
-		 
+		  */
 		
 		//---------------------------End bankNo--------------------------
 		
@@ -424,9 +466,8 @@ $(document).ready(function(){
 								<div class="col-sm-2" style="padding-top: 5px">
 									<label>Project : </label>
 								</div>
-								<div class="col-sm-10" style="padding-top: 5px">
-									<input type="text" class="form-control" name="project"
-										id="project">
+								<div class="col-sm-10" id="projectdiv">
+								</div>
 								</div>
 							</div>
 							<div class="form-group">
@@ -457,9 +498,7 @@ $(document).ready(function(){
 								<div class="col-sm-2" style="padding-top: 5px">
 									<label>Bank Account :</label>
 								</div>
-								<div class="col-sm-10" style="padding-top: 5px">
-									<input type="text" class="form-control" name="bankacc"
-										id="bankacc">
+								<div class="col-sm-10" id="bankaccdiv">
 								</div>
 							</div>
 
